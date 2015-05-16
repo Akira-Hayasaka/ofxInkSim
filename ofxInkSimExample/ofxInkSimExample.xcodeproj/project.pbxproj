@@ -247,6 +247,44 @@
 		E9C5BFA81B05D94500E272E5 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		E9C5BFAA1B05D94500E272E5 /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
 		E9C5BFAB1B05D94500E272E5 /* ofxXmlSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
+		E9E48A4F1B06B9D000E55FE1 /* addpigment.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = addpigment.frag; sourceTree = "<group>"; };
+		E9E48A501B06B9D000E55FE1 /* addwater.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = addwater.frag; sourceTree = "<group>"; };
+		E9E48A511B06B9D000E55FE1 /* block.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = block.frag; sourceTree = "<group>"; };
+		E9E48A521B06B9D000E55FE1 /* collide1.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = collide1.frag; sourceTree = "<group>"; };
+		E9E48A531B06B9D000E55FE1 /* collide2.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = collide2.frag; sourceTree = "<group>"; };
+		E9E48A541B06B9D000E55FE1 /* gap.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = gap.frag; sourceTree = "<group>"; };
+		E9E48A551B06B9D000E55FE1 /* getvelden.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = getvelden.frag; sourceTree = "<group>"; };
+		E9E48A561B06B9D000E55FE1 /* getXYZ.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = getXYZ.frag; sourceTree = "<group>"; };
+		E9E48A571B06B9D000E55FE1 /* getz.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = getz.frag; sourceTree = "<group>"; };
+		E9E48A581B06B9D000E55FE1 /* header.glslinc */ = {isa = PBXFileReference; lastKnownFileType = text; path = header.glslinc; sourceTree = "<group>"; };
+		E9E48A591B06B9D000E55FE1 /* inkflow.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = inkflow.frag; sourceTree = "<group>"; };
+		E9E48A5A1B06B9D000E55FE1 /* inksupply.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = inksupply.frag; sourceTree = "<group>"; };
+		E9E48A5B1B06B9D000E55FE1 /* inkxamt.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = inkxamt.frag; sourceTree = "<group>"; };
+		E9E48A5C1B06B9D000E55FE1 /* inkxfr.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = inkxfr.frag; sourceTree = "<group>"; };
+		E9E48A5D1B06B9D000E55FE1 /* inkxto.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = inkxto.frag; sourceTree = "<group>"; };
+		E9E48A5E1B06B9D000E55FE1 /* simpleTex.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = simpleTex.vert; sourceTree = "<group>"; };
+		E9E48A5F1B06B9D000E55FE1 /* stream1.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = stream1.frag; sourceTree = "<group>"; };
+		E9E48A601B06B9D000E55FE1 /* stream2.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = stream2.frag; sourceTree = "<group>"; };
+		E9E48A611B06B9D000E55FE1 /* test.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = test.frag; sourceTree = "<group>"; };
+		E9E48A631B06B9D000E55FE1 /* addpigment.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = addpigment.frag; sourceTree = "<group>"; };
+		E9E48A641B06B9D000E55FE1 /* addwater.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = addwater.frag; sourceTree = "<group>"; };
+		E9E48A651B06B9D000E55FE1 /* block.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = block.frag; sourceTree = "<group>"; };
+		E9E48A661B06B9D000E55FE1 /* collide1.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = collide1.frag; sourceTree = "<group>"; };
+		E9E48A671B06B9D000E55FE1 /* collide2.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = collide2.frag; sourceTree = "<group>"; };
+		E9E48A681B06B9D000E55FE1 /* gap.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = gap.frag; sourceTree = "<group>"; };
+		E9E48A691B06B9D000E55FE1 /* getvelden.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = getvelden.frag; sourceTree = "<group>"; };
+		E9E48A6A1B06B9D000E55FE1 /* getXYZ.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = getXYZ.frag; sourceTree = "<group>"; };
+		E9E48A6B1B06B9D000E55FE1 /* getz.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = getz.frag; sourceTree = "<group>"; };
+		E9E48A6C1B06B9D000E55FE1 /* header.glslinc */ = {isa = PBXFileReference; lastKnownFileType = text; path = header.glslinc; sourceTree = "<group>"; };
+		E9E48A6D1B06B9D000E55FE1 /* inkflow.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = inkflow.frag; sourceTree = "<group>"; };
+		E9E48A6E1B06B9D000E55FE1 /* inksupply.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = inksupply.frag; sourceTree = "<group>"; };
+		E9E48A6F1B06B9D000E55FE1 /* inkxamt.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = inkxamt.frag; sourceTree = "<group>"; };
+		E9E48A701B06B9D000E55FE1 /* inkxfr.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = inkxfr.frag; sourceTree = "<group>"; };
+		E9E48A711B06B9D000E55FE1 /* inkxto.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = inkxto.frag; sourceTree = "<group>"; };
+		E9E48A721B06B9D000E55FE1 /* simpleTex.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = simpleTex.vert; sourceTree = "<group>"; };
+		E9E48A731B06B9D000E55FE1 /* stream1.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = stream1.frag; sourceTree = "<group>"; };
+		E9E48A741B06B9D000E55FE1 /* stream2.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = stream2.frag; sourceTree = "<group>"; };
+		E9E48A751B06B9D000E55FE1 /* test.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = test.frag; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -339,6 +377,7 @@
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
+				E9E48A4D1B06B9D000E55FE1 /* shaders */,
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
@@ -547,6 +586,68 @@
 				E9C5BFAB1B05D94500E272E5 /* ofxXmlSettings.h */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		E9E48A4D1B06B9D000E55FE1 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				E9E48A4E1B06B9D000E55FE1 /* shadersGL2 */,
+				E9E48A621B06B9D000E55FE1 /* shadersGL3 */,
+			);
+			name = shaders;
+			path = bin/data/shaders;
+			sourceTree = "<group>";
+		};
+		E9E48A4E1B06B9D000E55FE1 /* shadersGL2 */ = {
+			isa = PBXGroup;
+			children = (
+				E9E48A4F1B06B9D000E55FE1 /* addpigment.frag */,
+				E9E48A501B06B9D000E55FE1 /* addwater.frag */,
+				E9E48A511B06B9D000E55FE1 /* block.frag */,
+				E9E48A521B06B9D000E55FE1 /* collide1.frag */,
+				E9E48A531B06B9D000E55FE1 /* collide2.frag */,
+				E9E48A541B06B9D000E55FE1 /* gap.frag */,
+				E9E48A551B06B9D000E55FE1 /* getvelden.frag */,
+				E9E48A561B06B9D000E55FE1 /* getXYZ.frag */,
+				E9E48A571B06B9D000E55FE1 /* getz.frag */,
+				E9E48A581B06B9D000E55FE1 /* header.glslinc */,
+				E9E48A591B06B9D000E55FE1 /* inkflow.frag */,
+				E9E48A5A1B06B9D000E55FE1 /* inksupply.frag */,
+				E9E48A5B1B06B9D000E55FE1 /* inkxamt.frag */,
+				E9E48A5C1B06B9D000E55FE1 /* inkxfr.frag */,
+				E9E48A5D1B06B9D000E55FE1 /* inkxto.frag */,
+				E9E48A5E1B06B9D000E55FE1 /* simpleTex.vert */,
+				E9E48A5F1B06B9D000E55FE1 /* stream1.frag */,
+				E9E48A601B06B9D000E55FE1 /* stream2.frag */,
+				E9E48A611B06B9D000E55FE1 /* test.frag */,
+			);
+			path = shadersGL2;
+			sourceTree = "<group>";
+		};
+		E9E48A621B06B9D000E55FE1 /* shadersGL3 */ = {
+			isa = PBXGroup;
+			children = (
+				E9E48A631B06B9D000E55FE1 /* addpigment.frag */,
+				E9E48A641B06B9D000E55FE1 /* addwater.frag */,
+				E9E48A651B06B9D000E55FE1 /* block.frag */,
+				E9E48A661B06B9D000E55FE1 /* collide1.frag */,
+				E9E48A671B06B9D000E55FE1 /* collide2.frag */,
+				E9E48A681B06B9D000E55FE1 /* gap.frag */,
+				E9E48A691B06B9D000E55FE1 /* getvelden.frag */,
+				E9E48A6A1B06B9D000E55FE1 /* getXYZ.frag */,
+				E9E48A6B1B06B9D000E55FE1 /* getz.frag */,
+				E9E48A6C1B06B9D000E55FE1 /* header.glslinc */,
+				E9E48A6D1B06B9D000E55FE1 /* inkflow.frag */,
+				E9E48A6E1B06B9D000E55FE1 /* inksupply.frag */,
+				E9E48A6F1B06B9D000E55FE1 /* inkxamt.frag */,
+				E9E48A701B06B9D000E55FE1 /* inkxfr.frag */,
+				E9E48A711B06B9D000E55FE1 /* inkxto.frag */,
+				E9E48A721B06B9D000E55FE1 /* simpleTex.vert */,
+				E9E48A731B06B9D000E55FE1 /* stream1.frag */,
+				E9E48A741B06B9D000E55FE1 /* stream2.frag */,
+				E9E48A751B06B9D000E55FE1 /* test.frag */,
+			);
+			path = shadersGL3;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
