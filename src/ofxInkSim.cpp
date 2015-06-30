@@ -8,19 +8,20 @@
 
 #include "ofxInkSim.h"
 
-void ofxInkSim::setup(BrashIF* brush)
+void ofxInkSim::setup(BrashIF* brush, int width, int height)
 {
     this->brush = brush;
+    this->width = width;
+    this->height = height;
     
     ofDisableArbTex();
     
-    uniforms = ofPtr<UniformInfos>(new UniformInfos);
-    
-    pxSize = ofVec2f::one() / ofVec2f(ofGetWidth(), ofGetHeight());
+    pxSize = ofVec2f::one() / ofVec2f(width, height);
     offset = pxSize;
     
-    plane.set(ofGetWidth(), ofGetHeight(), 10, 10);
-    plane.mapTexCoords(0, 0, ofGetWidth(), ofGetHeight());
+    quad.getVertices().resize(4);
+    quad.getTexCoords().resize(4);
+    quad.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
     
     if (ofGetGLProgrammableRenderer())
     {
@@ -65,8 +66,8 @@ void ofxInkSim::setup(BrashIF* brush)
     ofLoadImage(Alum, "tex/alum3.jpg");
     ofLoadImage(Pinning, "tex/pinning.jpg");
     ofFbo::Settings settings;
-    settings.width = ofGetWidth();
-    settings.height = ofGetHeight();
+    settings.width = width;
+    settings.height = height;
     settings.textureTarget = GL_TEXTURE_2D;
     settings.internalformat = GL_RGBA32F_ARB;
     screen.allocate(settings);
@@ -119,7 +120,7 @@ void ofxInkSim::update()
     block.setUniformTexture("FlowInkMap", FlowInk.getOldTex()->getTextureReference(), 2);
     block.setUniformTexture("FixInkMap", FixInk.getOldTex()->getTextureReference(), 3);
     block.setUniformTexture("DisorderMap", Disorder.getTextureReference(), 4);
-    drawPlane();
+    drawPlane(width, height);
     block.end();
     Misc.getNewTex()->end();
     Misc.swap();
@@ -136,7 +137,7 @@ void ofxInkSim::update()
     collide1.setUniformTexture("VelDenMap", VelDen.getOldTex()->getTextureReference(), 0);
     collide1.setUniformTexture("Dist1Map", Dist1.getOldTex()->getTextureReference(), 1);
     collide1.setUniformTexture("InkMap", FlowInk.getOldTex()->getTextureReference(), 2);
-    drawPlane();
+    drawPlane(width, height);
     collide1.end();
     Dist1.getNewTex()->end();
     Dist1.swap();
@@ -153,7 +154,7 @@ void ofxInkSim::update()
     collide2.setUniformTexture("VelDenMap", VelDen.getOldTex()->getTextureReference(), 0);
     collide2.setUniformTexture("Dist2Map", Dist2.getOldTex()->getTextureReference(), 1);
     collide2.setUniformTexture("InkMap", FlowInk.getOldTex()->getTextureReference(), 2);
-    drawPlane();
+    drawPlane(width, height);
     collide2.end();
     Dist2.getNewTex()->end();
     Dist2.swap();
@@ -165,7 +166,7 @@ void ofxInkSim::update()
     stream1.setUniform2fv("offset", offset.getPtr());
     stream1.setUniformTexture("MiscMap", Misc.getOldTex()->getTextureReference(), 0);
     stream1.setUniformTexture("Dist1Map", Dist1.getOldTex()->getTextureReference(), 1);
-    drawPlane();
+    drawPlane(width, height);
     stream1.end();
     Dist1.getNewTex()->end();
     Dist1.swap();
@@ -177,7 +178,7 @@ void ofxInkSim::update()
     stream2.setUniform2fv("offset", offset.getPtr());
     stream2.setUniformTexture("MiscMap", Misc.getOldTex()->getTextureReference(), 0);
     stream2.setUniformTexture("Dist2Map", Dist2.getOldTex()->getTextureReference(), 1);
-    drawPlane();
+    drawPlane(width, height);
     stream2.end();
     Dist2.getNewTex()->end();
     Dist2.swap();
@@ -191,7 +192,7 @@ void ofxInkSim::update()
     GetVelDen.setUniformTexture("Dist1Map", Dist1.getOldTex()->getTextureReference(), 1);
     GetVelDen.setUniformTexture("Dist2Map", Dist2.getOldTex()->getTextureReference(), 2);
     GetVelDen.setUniformTexture("VelDenMap", VelDen.getOldTex()->getTextureReference(), 3);
-    drawPlane();
+    drawPlane(width, height);
     GetVelDen.end();
     VelDen.getNewTex()->end();
     VelDen.swap();
@@ -202,7 +203,7 @@ void ofxInkSim::update()
     InkSupply.setUniformTexture("VelDenMap", VelDen.getOldTex()->getTextureReference(), 0);
     InkSupply.setUniformTexture("SurfInkMap", SurfInk.getOldTex()->getTextureReference(), 1);
     InkSupply.setUniformTexture("MiscMap", Misc.getOldTex()->getTextureReference(), 2);
-    drawPlane();
+    drawPlane(width, height);
     InkSupply.end();
     SurfInk.getNewTex()->end();
     SurfInk.swap();
@@ -215,7 +216,7 @@ void ofxInkSim::update()
     InkXAmt.setUniformTexture("MiscMap", Misc.getOldTex()->getTextureReference(), 1);
     InkXAmt.setUniformTexture("FlowInkMap", FlowInk.getOldTex()->getTextureReference(), 2);
     InkXAmt.setUniformTexture("FixInkMap", FixInk.getOldTex()->getTextureReference(), 3);
-    drawPlane();
+    drawPlane(width, height);
     InkXAmt.end();
     SinkInk.getNewTex()->end();
     SinkInk.swap();
@@ -225,7 +226,7 @@ void ofxInkSim::update()
     InkXTo.setUniform2fv("pxSize", pxSize.getPtr());
     InkXTo.setUniformTexture("FixInkMap", FixInk.getOldTex()->getTextureReference(), 0);
     InkXTo.setUniformTexture("SinkInkMap", SinkInk.getOldTex()->getTextureReference(), 1);
-    drawPlane();
+    drawPlane(width, height);
     InkXTo.end();
     FixInk.getNewTex()->end();
     FixInk.swap();
@@ -235,7 +236,7 @@ void ofxInkSim::update()
     InkXFr.setUniform2fv("pxSize", pxSize.getPtr());
     InkXFr.setUniformTexture("FlowInkMap", FlowInk.getOldTex()->getTextureReference(), 0);
     InkXFr.setUniformTexture("SinkInkMap", SinkInk.getOldTex()->getTextureReference(), 1);
-    drawPlane();
+    drawPlane(width, height);
     InkXFr.end();
     FlowInk.getNewTex()->end();
     FlowInk.swap();
@@ -251,7 +252,7 @@ void ofxInkSim::update()
     InkFlow.setUniformTexture("Dist2Map", Dist2.getOldTex()->getTextureReference(), 3);
     InkFlow.setUniformTexture("FlowInkMap", FlowInk.getOldTex()->getTextureReference(), 4);
     InkFlow.setUniformTexture("SurfInkMap", SurfInk.getOldTex()->getTextureReference(), 5);
-    drawPlane();
+    drawPlane(width, height);
     InkFlow.end();
     FlowInk.getNewTex()->end();
     FlowInk.swap();
@@ -263,28 +264,28 @@ void ofxInkSim::draw()
     if (drawMode == INKFIX)
     {
         whatdraw = "INKFIX";
-        drawXYZ(FixInk.getOldTex()->getTextureReference(), 0, 0, ofGetWidth(), ofGetHeight());
+        drawXYZ(FixInk.getOldTex()->getTextureReference(), 0, 0, width, height);
     }
     else if (drawMode == INKSURF)
     {
         whatdraw = "INKSURF";
-        drawXYZ(SurfInk.getOldTex()->getTextureReference(), 0, 0, ofGetWidth(), ofGetHeight());
+        drawXYZ(SurfInk.getOldTex()->getTextureReference(), 0, 0, width, height);
     }
     else if (drawMode == INKFLOW)
     {
         whatdraw = "INKFLOW";
-        drawXYZ(FlowInk.getOldTex()->getTextureReference(), 0, 0, ofGetWidth(), ofGetHeight());
+        drawXYZ(FlowInk.getOldTex()->getTextureReference(), 0, 0, width, height);
     }
     else if (drawMode == WATERFLOW)
     {
         whatdraw = "WATERFLOW";
-        drawZ(VelDen.getOldTex()->getTextureReference(), 0, 0, ofGetWidth(), ofGetHeight());
+        drawZ(VelDen.getOldTex()->getTextureReference(), 0, 0, width, height);
     }
     
     if (bDebug)
     {
-        int w = ofGetWidth()/8;
-        int h = ofGetHeight()/8;
+        int w = width/8;
+        int h = height/8;
         
         drawXYZ(SurfInk.getOldTex()->getTextureReference(), 0, 0, w, h);
         drawXYZ(Misc.getOldTex()->getTextureReference(), w*1, 0, w, h);
@@ -310,40 +311,45 @@ void ofxInkSim::draw()
         Pinning.draw(w*3, h, w, h);
         drawXYZ(Disorder.getTextureReference(), w*4, h, w, h);
         
-        drawXYZ(SurfInk.getNewTex()->getTextureReference(), 0, ofGetHeight() - h, w, h);
-        drawXYZ(Misc.getNewTex()->getTextureReference(), w*1, ofGetHeight() - h, w, h);
-        drawXYZ(VelDen.getNewTex()->getTextureReference(), w*2, ofGetHeight() - h, w, h);
-        drawXYZ(FlowInk.getNewTex()->getTextureReference(), w*3, ofGetHeight() - h, w, h);
-        drawXYZ(FixInk.getNewTex()->getTextureReference(), w*4, ofGetHeight() - h, w, h);
-        drawXYZ(Dist1.getNewTex()->getTextureReference(), w*5, ofGetHeight() - h, w, h);
-        drawXYZ(Dist2.getNewTex()->getTextureReference(), w*6, ofGetHeight() - h, w, h);
-        drawXYZ(SinkInk.getNewTex()->getTextureReference(), w*7, ofGetHeight() - h, w, h);
+        drawXYZ(SurfInk.getNewTex()->getTextureReference(), 0, height - h, w, h);
+        drawXYZ(Misc.getNewTex()->getTextureReference(), w*1, height - h, w, h);
+        drawXYZ(VelDen.getNewTex()->getTextureReference(), w*2, height - h, w, h);
+        drawXYZ(FlowInk.getNewTex()->getTextureReference(), w*3, height - h, w, h);
+        drawXYZ(FixInk.getNewTex()->getTextureReference(), w*4, height - h, w, h);
+        drawXYZ(Dist1.getNewTex()->getTextureReference(), w*5, height - h, w, h);
+        drawXYZ(Dist2.getNewTex()->getTextureReference(), w*6, height - h, w, h);
+        drawXYZ(SinkInk.getNewTex()->getTextureReference(), w*7, height - h, w, h);
         
-        ofDrawBitmapStringHighlight("SurfInk NEW", 0, ofGetHeight() - h);
-        ofDrawBitmapStringHighlight("Misc NEW", w*1, ofGetHeight() - h);
-        ofDrawBitmapStringHighlight("VelDen NEW", w*2, ofGetHeight() - h);
-        ofDrawBitmapStringHighlight("FlowInk NEW", w*3, ofGetHeight() - h);
-        ofDrawBitmapStringHighlight("FixInk NEW", w*4, ofGetHeight() - h);
-        ofDrawBitmapStringHighlight("Dist1 NEW", w*5, ofGetHeight() - h);
-        ofDrawBitmapStringHighlight("Dist2 NEW", w*6, ofGetHeight() - h);
-        ofDrawBitmapStringHighlight("SinkInk NEW", w*7, ofGetHeight() - h);
+        ofDrawBitmapStringHighlight("SurfInk NEW", 0, height - h);
+        ofDrawBitmapStringHighlight("Misc NEW", w*1, height - h);
+        ofDrawBitmapStringHighlight("VelDen NEW", w*2, height - h);
+        ofDrawBitmapStringHighlight("FlowInk NEW", w*3, height - h);
+        ofDrawBitmapStringHighlight("FixInk NEW", w*4, height - h);
+        ofDrawBitmapStringHighlight("Dist1 NEW", w*5, height - h);
+        ofDrawBitmapStringHighlight("Dist2 NEW", w*6, height - h);
+        ofDrawBitmapStringHighlight("SinkInk NEW", w*7, height - h);
         
-        ofDrawBitmapStringHighlight(whatdraw, 0, ofGetHeight() - h - 50);
-        ofDrawBitmapStringHighlight("fps:" + ofToString(ofGetFrameRate()), 0, ofGetHeight() - h - 30);
+        ofDrawBitmapStringHighlight(whatdraw, 0, height - h - 50);
+        ofDrawBitmapStringHighlight("fps:" + ofToString(ofGetFrameRate()), 0, height - h - 30);
     }
 }
 
 void ofxInkSim::stroke(int x, int y, ofColor brushCol)
 {
-    brush->dragged(x, y);
+    stroke(x, y, brushCol, uniforms->brushsize);
+}
 
+void ofxInkSim::stroke(int x, int y, ofColor brushCol, float brushSize)
+{
+    brush->dragged(x, y);
+    
     ofEnableBlendMode(OF_BLENDMODE_SCREEN);
     
     depositionBuffer.begin();
     ofClear(0, 0);
     ofPushStyle();
     ofSetColor(brushCol);
-    brush->draw(uniforms->brushsize);
+    brush->draw(brushSize);
     ofPopStyle();
     depositionBuffer.end();
     
@@ -399,7 +405,7 @@ void ofxInkSim::depositeOnPaperSurface()
     addpigment.setUniformTexture("SurfInk", SurfInk.getOldTex()->getTextureReference(), 0);
     addpigment.setUniformTexture("WaterSurface", depositionBuffer.getTextureReference(), 1);
     addpigment.setUniformTexture("Misc", Misc.getOldTex()->getTextureReference(), 2);
-    drawPlane();
+    drawPlane(width, height);
     addpigment.end();
     SurfInk.getNewTex()->end();
     SurfInk.swap();
@@ -413,7 +419,7 @@ void ofxInkSim::depositeOnPaperSurface()
     addwater.setUniform1f("waterAmount", uniforms->waterAmount);
     addwater.setUniformTexture("Misc", Misc.getOldTex()->getTextureReference(), 0);
     addwater.setUniformTexture("WaterSurface", depositionBuffer.getTextureReference(), 1);
-    drawPlane();
+    drawPlane(width, height);
     addwater.end();
     Misc.getNewTex()->end();
     Misc.swap();
@@ -428,7 +434,7 @@ void ofxInkSim::drawXYZ(ofTexture& texRef, float x, float y, float w, float h)
     getXYZ.begin();
     getXYZ.setUniform2fv("pxSize", pxSize.getPtr());
     getXYZ.setUniformTexture("src", texRef, 0);
-    drawPlane();
+    drawPlane(width, height);
     getXYZ.end();
     screen.end();
     screen.draw(x, y, w, h);
@@ -441,18 +447,10 @@ void ofxInkSim::drawZ(ofTexture& texRef, float x, float y, float w, float h)
     getZ.begin();
     getZ.setUniform2fv("pxSize", pxSize.getPtr());
     getZ.setUniformTexture("src", texRef, 0);
-    drawPlane();
+    drawPlane(width, height);
     getZ.end();
     screen.end();
     screen.draw(x, y, w, h);
-}
-
-void ofxInkSim::drawPlane()
-{
-    ofPushMatrix();
-    ofTranslate(plane.getWidth()/2, plane.getHeight()/2);
-    plane.draw();
-    ofPopMatrix();
 }
 
 void ofxInkSim::fillDisorderBuffer()
@@ -464,7 +462,7 @@ void ofxInkSim::fillDisorderBuffer()
     GAP.setUniformTexture("Grain", Grain, 0);
     GAP.setUniformTexture("Alum", Alum, 1);
     GAP.setUniformTexture("Pinning", Pinning, 2);
-    drawPlane();
+    drawPlane(width, height);
     GAP.end();
     Disorder.end();
     ofDisableBlendMode();
