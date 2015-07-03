@@ -76,6 +76,14 @@ public:
     float wf_mul;
 };
 
+struct StrokeInfo
+{
+    ofPtr<BrashIF> brush;
+    ofPoint pos;
+    ofColor col;
+    float brushSize;
+};
+
 class ofxInkSim
 {
 public:
@@ -90,12 +98,14 @@ public:
     DRAWMODE drawMode;
     
     ofxInkSim() { uniforms = ofPtr<UniformInfos>(new UniformInfos); }
-    void setup(BrashIF* brush, int width = ofGetWidth(), int height = ofGetHeight());
+    void setup(int width = ofGetWidth(), int height = ofGetHeight());
     void update();
     void draw();
-    void stroke(int x, int y, ofColor brushCol);
-    void stroke(int x, int y, ofColor brushCol, float brushSize);
-    void stopStroke();
+    void stroke(vector<StrokeInfo> sis);
+    void stroke(BrashIF* brush, int x, int y, ofColor brushCol);
+    void stroke(BrashIF* brush, int x, int y, ofColor brushCol, float brushSize);
+    void stopStroke(vector<StrokeInfo> sis);
+    void stopStroke(BrashIF* brush);
     void clear();
     void setDrawMode(DRAWMODE drawMode);
     void toggleDebug();

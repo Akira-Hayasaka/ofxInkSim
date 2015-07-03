@@ -8,7 +8,7 @@
 
 #include "ofxInkSim.h"
 
-void ofxInkSim::setup(BrashIF* brush, int width, int height)
+void ofxInkSim::setup(int width, int height)
 {
     this->brush = brush;
     this->width = width;
@@ -334,12 +334,35 @@ void ofxInkSim::draw()
     }
 }
 
-void ofxInkSim::stroke(int x, int y, ofColor brushCol)
+void ofxInkSim::stroke(vector<StrokeInfo> sis)
 {
-    stroke(x, y, brushCol, uniforms->brushsize);
+    ofEnableBlendMode(OF_BLENDMODE_SCREEN);
+    
+    depositionBuffer.begin();
+    ofClear(0, 0);
+    ofPushStyle();
+    
+    for (auto& si: sis)
+    {
+        si.brush->dragged(si.pos.x, si.pos.y);
+        ofSetColor(si.col);
+        si.brush->draw(si.brushSize);
+    }
+    
+    ofPopStyle();
+    depositionBuffer.end();
+    
+    ofDisableBlendMode();
+    
+    depositeOnPaperSurface();
 }
 
-void ofxInkSim::stroke(int x, int y, ofColor brushCol, float brushSize)
+void ofxInkSim::stroke(BrashIF* brush, int x, int y, ofColor brushCol)
+{
+    stroke(brush, x, y, brushCol, uniforms->brushsize);
+}
+
+void ofxInkSim::stroke(BrashIF* brush, int x, int y, ofColor brushCol, float brushSize)
 {
     brush->dragged(x, y);
     
@@ -358,7 +381,13 @@ void ofxInkSim::stroke(int x, int y, ofColor brushCol, float brushSize)
     depositeOnPaperSurface();
 }
 
-void ofxInkSim::stopStroke()
+void ofxInkSim::stopStroke(vector<StrokeInfo> sis)
+{
+    for (auto& si : sis)
+        si.brush->released();
+}
+
+void ofxInkSim::stopStroke(BrashIF* brush)
 {
     brush->released();
 }
