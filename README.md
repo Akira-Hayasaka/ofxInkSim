@@ -2,6 +2,7 @@
 
 ![ofxInkSim](https://github.com/Akira-Hayasaka/ofxInkSim/raw/master/redmeimg/a.png)
 ![ofxInkSim](https://github.com/Akira-Hayasaka/ofxInkSim/raw/master/redmeimg/c.png)
+![ofxInkSim](https://github.com/Akira-Hayasaka/ofxInkSim/raw/master/redmeimg/d.png)
 
 mov => https://vimeo.com/127985032
 
