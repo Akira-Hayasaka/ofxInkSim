@@ -4,7 +4,7 @@
 
 void ofApp::setup()
 {
-    inkSim.setup(&brush);
+    inkSim.setup();
     gui.setup(inkSim.getUniformInfo());
     moodmachine.setSpeed(1.0);
 }
@@ -28,12 +28,12 @@ void ofApp::exit()
 
 void ofApp::mouseDragged(int x, int y, int button)
 {
-    inkSim.stroke(x, y, moodmachine);
+    inkSim.stroke(&brush, x, y, moodmachine);
 }
 
 void ofApp::mouseReleased(int x, int y, int button)
 {
-    inkSim.stopStroke();
+    inkSim.stopStroke(&brush);
 }
 
 void ofApp::keyPressed(int key)
