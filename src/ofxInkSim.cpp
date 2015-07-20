@@ -8,9 +8,9 @@
 
 #include "ofxInkSim.h"
 
-void ofxInkSim::setup(int width, int height)
+void ofxInkSim::setup(int width, int height,
+                      string grainPath, string alumPath, string pinningPath)
 {
-    this->brush = brush;
     this->width = width;
     this->height = height;
     
@@ -19,52 +19,9 @@ void ofxInkSim::setup(int width, int height)
     pxSize = ofVec2f::one() / ofVec2f(width, height);
     offset = pxSize;
     
-    quad.getVertices().resize(4);
-    quad.getTexCoords().resize(4);
-    quad.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
-    
-    if (ofGetGLProgrammableRenderer())
-    {
-        GAP.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/gap.frag");
-        addpigment.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/addpigment.frag");
-        addwater.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/addwater.frag");
-        block.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/block.frag");
-        collide1.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/collide1.frag");
-        collide2.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/collide2.frag");
-        stream1.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/stream1.frag");
-        stream2.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/stream2.frag");
-        GetVelDen.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/getvelden.frag");
-        InkSupply.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/inksupply.frag");
-        InkXAmt.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/inkxamt.frag");
-        InkXTo.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/inkxto.frag");
-        InkXFr.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/inkxfr.frag");
-        InkFlow.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/inkflow.frag");
-        getXYZ.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/getXYZ.frag");
-        getZ.load("shaders/shadersGL3/simpleTex.vert", "shaders/shadersGL3/getz.frag");
-    }
-    else
-    {
-        GAP.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/gap.frag");
-        addpigment.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/addpigment.frag");
-        addwater.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/addwater.frag");
-        block.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/block.frag");
-        collide1.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/collide1.frag");
-        collide2.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/collide2.frag");
-        stream1.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/stream1.frag");
-        stream2.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/stream2.frag");
-        GetVelDen.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/getvelden.frag");
-        InkSupply.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/inksupply.frag");
-        InkXAmt.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/inkxamt.frag");
-        InkXTo.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/inkxto.frag");
-        InkXFr.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/inkxfr.frag");
-        InkFlow.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/inkflow.frag");
-        getXYZ.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/getXYZ.frag");
-        getZ.load("shaders/shadersGL2/simpleTex.vert", "shaders/shadersGL2/getz.frag");
-    }
-    
-    ofLoadImage(Grain, "tex/grain.jpg");
-    ofLoadImage(Alum, "tex/alum3.jpg");
-    ofLoadImage(Pinning, "tex/pinning.jpg");
+    ofLoadImage(Grain, grainPath);
+    ofLoadImage(Alum, alumPath);
+    ofLoadImage(Pinning, pinningPath);
     ofFbo::Settings settings;
     settings.width = width;
     settings.height = height;
@@ -104,156 +61,123 @@ void ofxInkSim::setup(int width, int height)
 void ofxInkSim::update()
 {
     Misc.getNewTex()->begin();
-    block.begin();
-    block.setUniform2fv("pxSize", pxSize.getPtr());
-    block.setUniform1f("A0", 0.4444444f);
-    block.setUniform1f("advect_p", uniforms->advect_p);
-    block.setUniform3f("Blk_1", uniforms->b11, uniforms->b12, uniforms->b13);
-    block.setUniform2f("Blk_2", uniforms->b21, uniforms->b22);
-    block.setUniform3f("Pin_w", uniforms->p1, uniforms->p2, uniforms->p3);
-    block.setUniform1f("toe_p", uniforms->toe_p);
-    block.setUniform1f("Omega", uniforms->omega);
-    block.setUniform1f("Corn_mul", pow(2.0f, 0.5f));
-    block.setUniform2fv("offset", offset.getPtr());
-    block.setUniformTexture("MiscMap", Misc.getOldTex()->getTextureReference(), 0);
-    block.setUniformTexture("VelDenMap", VelDen.getOldTex()->getTextureReference(), 1);
-    block.setUniformTexture("FlowInkMap", FlowInk.getOldTex()->getTextureReference(), 2);
-    block.setUniformTexture("FixInkMap", FixInk.getOldTex()->getTextureReference(), 3);
-    block.setUniformTexture("DisorderMap", Disorder.getTextureReference(), 4);
-    drawPlane(width, height);
-    block.end();
+    block.update(width, height,
+                 pxSize,
+                 uniforms->advect_p,
+                 uniforms->b11, uniforms->b12, uniforms->b13,
+                 uniforms->b21, uniforms->b22,
+                 uniforms->p1, uniforms->p2, uniforms->p3,
+                 uniforms->toe_p,
+                 uniforms->omega,
+                 offset,
+                 Misc.getOldTex()->getTextureReference(),
+                 VelDen.getOldTex()->getTextureReference(),
+                 FlowInk.getOldTex()->getTextureReference(),
+                 FixInk.getOldTex()->getTextureReference(),
+                 Disorder.getTextureReference());
     Misc.getNewTex()->end();
     Misc.swap();
     
     Dist1.getNewTex()->begin();
-    collide1.begin();
-    collide1.setUniform2fv("pxSize", pxSize.getPtr());
-    collide1.setUniform1f("A", 0.1111111f);
-    collide1.setUniform1f("B", 0.3333333f);
-    collide1.setUniform1f("C", 0.5f);
-    collide1.setUniform1f("D", 0.1666667f);
-    collide1.setUniform1f("advect_p", uniforms->advect_p);
-    collide1.setUniform1f("Omega", uniforms->omega);
-    collide1.setUniformTexture("VelDenMap", VelDen.getOldTex()->getTextureReference(), 0);
-    collide1.setUniformTexture("Dist1Map", Dist1.getOldTex()->getTextureReference(), 1);
-    collide1.setUniformTexture("InkMap", FlowInk.getOldTex()->getTextureReference(), 2);
-    drawPlane(width, height);
-    collide1.end();
+    collide1.update(width, height,
+                    pxSize,
+                    uniforms->advect_p,
+                    uniforms->omega,
+                    VelDen.getOldTex()->getTextureReference(),
+                    Dist1.getOldTex()->getTextureReference(),
+                    FlowInk.getOldTex()->getTextureReference());
     Dist1.getNewTex()->end();
     Dist1.swap();
     
     Dist2.getNewTex()->begin();
-    collide2.begin();
-    collide2.setUniform2fv("pxSize", pxSize.getPtr());
-    collide2.setUniform1f("A", 0.02777778f);
-    collide2.setUniform1f("B", 0.08333334f);
-    collide2.setUniform1f("C", 0.125f);
-    collide2.setUniform1f("D", 0.04166667f);
-    collide2.setUniform1f("advect_p", uniforms->advect_p);
-    collide2.setUniform1f("Omega", uniforms->omega);
-    collide2.setUniformTexture("VelDenMap", VelDen.getOldTex()->getTextureReference(), 0);
-    collide2.setUniformTexture("Dist2Map", Dist2.getOldTex()->getTextureReference(), 1);
-    collide2.setUniformTexture("InkMap", FlowInk.getOldTex()->getTextureReference(), 2);
-    drawPlane(width, height);
-    collide2.end();
+    collide2.update(width, height,
+                    pxSize,
+                    uniforms->advect_p,
+                    uniforms->omega,
+                    VelDen.getOldTex()->getTextureReference(),
+                    Dist2.getOldTex()->getTextureReference(),
+                    FlowInk.getOldTex()->getTextureReference());
     Dist2.getNewTex()->end();
     Dist2.swap();
     
     Dist1.getNewTex()->begin();
-    stream1.begin();
-    stream1.setUniform2fv("pxSize", pxSize.getPtr());
-    stream1.setUniform1f("Evapor_b", uniforms->evapor_b);
-    stream1.setUniform2fv("offset", offset.getPtr());
-    stream1.setUniformTexture("MiscMap", Misc.getOldTex()->getTextureReference(), 0);
-    stream1.setUniformTexture("Dist1Map", Dist1.getOldTex()->getTextureReference(), 1);
-    drawPlane(width, height);
-    stream1.end();
+    stream1.update(width, height,
+                   pxSize,
+                   uniforms->evapor_b,
+                   offset,
+                   Misc.getOldTex()->getTextureReference(),
+                   Dist1.getOldTex()->getTextureReference());
     Dist1.getNewTex()->end();
     Dist1.swap();
     
     Dist2.getNewTex()->begin();
-    stream2.begin();
-    stream2.setUniform2fv("pxSize", pxSize.getPtr());
-    stream2.setUniform1f("Evapor_b", uniforms->evapor_b);
-    stream2.setUniform2fv("offset", offset.getPtr());
-    stream2.setUniformTexture("MiscMap", Misc.getOldTex()->getTextureReference(), 0);
-    stream2.setUniformTexture("Dist2Map", Dist2.getOldTex()->getTextureReference(), 1);
-    drawPlane(width, height);
-    stream2.end();
+    stream2.update(width, height,
+                   pxSize,
+                   uniforms->evapor_b,
+                   offset,
+                   Misc.getOldTex()->getTextureReference(),
+                   Dist2.getOldTex()->getTextureReference());
     Dist2.getNewTex()->end();
     Dist2.swap();
     
     VelDen.getNewTex()->begin();
-    GetVelDen.begin();
-    GetVelDen.setUniform2fv("pxSize", pxSize.getPtr());
-    GetVelDen.setUniform1f("wf_mul", uniforms->wf_mul);
-    GetVelDen.setUniform1f("Evapor", uniforms->evapor);
-    GetVelDen.setUniformTexture("MiscMap", Misc.getOldTex()->getTextureReference(), 0);
-    GetVelDen.setUniformTexture("Dist1Map", Dist1.getOldTex()->getTextureReference(), 1);
-    GetVelDen.setUniformTexture("Dist2Map", Dist2.getOldTex()->getTextureReference(), 2);
-    GetVelDen.setUniformTexture("VelDenMap", VelDen.getOldTex()->getTextureReference(), 3);
-    drawPlane(width, height);
-    GetVelDen.end();
+    GetVelDen.update(width, height,
+                     pxSize,
+                     uniforms->wf_mul,
+                     uniforms->evapor, Misc.getOldTex()->getTextureReference(),
+                     Dist1.getOldTex()->getTextureReference(),
+                     Dist2.getOldTex()->getTextureReference(),
+                     VelDen.getOldTex()->getTextureReference());
     VelDen.getNewTex()->end();
     VelDen.swap();
     
     SurfInk.getNewTex()->begin();
-    InkSupply.begin();
-    InkSupply.setUniform2fv("pxSize", pxSize.getPtr());
-    InkSupply.setUniformTexture("VelDenMap", VelDen.getOldTex()->getTextureReference(), 0);
-    InkSupply.setUniformTexture("SurfInkMap", SurfInk.getOldTex()->getTextureReference(), 1);
-    InkSupply.setUniformTexture("MiscMap", Misc.getOldTex()->getTextureReference(), 2);
-    drawPlane(width, height);
-    InkSupply.end();
+    InkSupply.update(width, height,
+                     pxSize,
+                     VelDen.getOldTex()->getTextureReference(),
+                     SurfInk.getOldTex()->getTextureReference(),
+                     Misc.getOldTex()->getTextureReference());
     SurfInk.getNewTex()->end();
     SurfInk.swap();
     
     SinkInk.getNewTex()->begin();
-    InkXAmt.begin();
-    InkXAmt.setUniform2fv("pxSize", pxSize.getPtr());
-    InkXAmt.setUniform3f("FixRate", uniforms->f1, uniforms->f2, uniforms->f3);
-    InkXAmt.setUniformTexture("VelDenMap", VelDen.getOldTex()->getTextureReference(), 0);
-    InkXAmt.setUniformTexture("MiscMap", Misc.getOldTex()->getTextureReference(), 1);
-    InkXAmt.setUniformTexture("FlowInkMap", FlowInk.getOldTex()->getTextureReference(), 2);
-    InkXAmt.setUniformTexture("FixInkMap", FixInk.getOldTex()->getTextureReference(), 3);
-    drawPlane(width, height);
-    InkXAmt.end();
+    InkXAmt.update(width, height,
+                   pxSize,
+                   uniforms->f1, uniforms->f2, uniforms->f3,
+                   VelDen.getOldTex()->getTextureReference(),
+                   Misc.getOldTex()->getTextureReference(),
+                   FlowInk.getOldTex()->getTextureReference(),
+                   FixInk.getOldTex()->getTextureReference());
     SinkInk.getNewTex()->end();
     SinkInk.swap();
     
     FixInk.getNewTex()->begin();
-    InkXTo.begin();
-    InkXTo.setUniform2fv("pxSize", pxSize.getPtr());
-    InkXTo.setUniformTexture("FixInkMap", FixInk.getOldTex()->getTextureReference(), 0);
-    InkXTo.setUniformTexture("SinkInkMap", SinkInk.getOldTex()->getTextureReference(), 1);
-    drawPlane(width, height);
-    InkXTo.end();
+    InkXTo.update(width, height,
+                  pxSize,
+                  FixInk.getOldTex()->getTextureReference(),
+                  SinkInk.getOldTex()->getTextureReference());
     FixInk.getNewTex()->end();
     FixInk.swap();
     
     FlowInk.getNewTex()->begin();
-    InkXFr.begin();
-    InkXFr.setUniform2fv("pxSize", pxSize.getPtr());
-    InkXFr.setUniformTexture("FlowInkMap", FlowInk.getOldTex()->getTextureReference(), 0);
-    InkXFr.setUniformTexture("SinkInkMap", SinkInk.getOldTex()->getTextureReference(), 1);
-    drawPlane(width, height);
-    InkXFr.end();
+    InkXFr.update(width, height,
+                  pxSize,
+                  FlowInk.getOldTex()->getTextureReference(),
+                  SinkInk.getOldTex()->getTextureReference());
     FlowInk.getNewTex()->end();
     FlowInk.swap();
     
     FlowInk.getNewTex()->begin();
-    InkFlow.begin();
-    InkFlow.setUniform2fv("pxSize", pxSize.getPtr());
-    InkFlow.setUniform2f("Blk_a", uniforms->ba1, uniforms->ba2);
-    InkFlow.setUniform2fv("offset", offset.getPtr());
-    InkFlow.setUniformTexture("VelDenMap", VelDen.getOldTex()->getTextureReference(), 0);
-    InkFlow.setUniformTexture("MiscMap", Misc.getOldTex()->getTextureReference(), 1);
-    InkFlow.setUniformTexture("Dist1Map", Dist1.getOldTex()->getTextureReference(), 2);
-    InkFlow.setUniformTexture("Dist2Map", Dist2.getOldTex()->getTextureReference(), 3);
-    InkFlow.setUniformTexture("FlowInkMap", FlowInk.getOldTex()->getTextureReference(), 4);
-    InkFlow.setUniformTexture("SurfInkMap", SurfInk.getOldTex()->getTextureReference(), 5);
-    drawPlane(width, height);
-    InkFlow.end();
+    InkFlow.update(width, height,
+                   pxSize,
+                   uniforms->ba1, uniforms->ba2,
+                   offset,
+                   VelDen.getOldTex()->getTextureReference(),
+                   Misc.getOldTex()->getTextureReference(),
+                   Dist1.getOldTex()->getTextureReference(),
+                   Dist2.getOldTex()->getTextureReference(),
+                   FlowInk.getOldTex()->getTextureReference(),
+                   SurfInk.getOldTex()->getTextureReference());
     FlowInk.getNewTex()->end();
     FlowInk.swap();
 }
@@ -427,29 +351,25 @@ void ofxInkSim::depositeOnPaperSurface()
     
     SurfInk.getNewTex()->begin();
     ofClear(0, 0);
-    addpigment.begin();
-    addpigment.setUniform2fv("pxSize", pxSize.getPtr());
-    addpigment.setUniform1f("gamma", uniforms->gamma);
-    addpigment.setUniform1f("baseMask", uniforms->baseMask);
-    addpigment.setUniformTexture("SurfInk", SurfInk.getOldTex()->getTextureReference(), 0);
-    addpigment.setUniformTexture("WaterSurface", depositionBuffer.getTextureReference(), 1);
-    addpigment.setUniformTexture("Misc", Misc.getOldTex()->getTextureReference(), 2);
-    drawPlane(width, height);
-    addpigment.end();
+    addpigment.update(width, height,
+                      pxSize,
+                      uniforms->gamma,
+                      uniforms->baseMask,
+                      SurfInk.getOldTex()->getTextureReference(),
+                      depositionBuffer.getTextureReference(),
+                      Misc.getOldTex()->getTextureReference());
     SurfInk.getNewTex()->end();
     SurfInk.swap();
     
     Misc.getNewTex()->begin();
     ofClear(0, 0);
-    addwater.begin();
-    addwater.setUniform2fv("pxSize", pxSize.getPtr());
-    addwater.setUniform1f("gamma", uniforms->gamma);
-    addwater.setUniform1f("baseMask", uniforms->baseMask);
-    addwater.setUniform1f("waterAmount", uniforms->waterAmount);
-    addwater.setUniformTexture("Misc", Misc.getOldTex()->getTextureReference(), 0);
-    addwater.setUniformTexture("WaterSurface", depositionBuffer.getTextureReference(), 1);
-    drawPlane(width, height);
-    addwater.end();
+    addwater.update(width, height,
+                    pxSize,
+                    uniforms->gamma,
+                    uniforms->baseMask,
+                    uniforms->waterAmount,
+                    Misc.getOldTex()->getTextureReference(),
+                    depositionBuffer.getTextureReference());
     Misc.getNewTex()->end();
     Misc.swap();
     
@@ -460,11 +380,7 @@ void ofxInkSim::drawXYZ(ofTexture& texRef, float x, float y, float w, float h)
 {
     screen.begin();
     ofClear(0, 0);
-    getXYZ.begin();
-    getXYZ.setUniform2fv("pxSize", pxSize.getPtr());
-    getXYZ.setUniformTexture("src", texRef, 0);
-    drawPlane(width, height);
-    getXYZ.end();
+    getXYZ.update(width, height, pxSize, texRef);
     screen.end();
     screen.draw(x, y, w, h);
 }
@@ -473,11 +389,7 @@ void ofxInkSim::drawZ(ofTexture& texRef, float x, float y, float w, float h)
 {
     screen.begin();
     ofClear(0, 0);
-    getZ.begin();
-    getZ.setUniform2fv("pxSize", pxSize.getPtr());
-    getZ.setUniformTexture("src", texRef, 0);
-    drawPlane(width, height);
-    getZ.end();
+    getZ.update(width, height, pxSize, texRef);
     screen.end();
     screen.draw(x, y, w, h);
 }
@@ -486,13 +398,7 @@ void ofxInkSim::fillDisorderBuffer()
 {
     ofEnableBlendMode(OF_BLENDMODE_SCREEN);
     Disorder.begin();
-    GAP.begin();
-    GAP.setUniform2fv("pxSize", pxSize.getPtr());
-    GAP.setUniformTexture("Grain", Grain, 0);
-    GAP.setUniformTexture("Alum", Alum, 1);
-    GAP.setUniformTexture("Pinning", Pinning, 2);
-    drawPlane(width, height);
-    GAP.end();
+    GAP.update(width, height, pxSize, Grain, Alum, Pinning);
     Disorder.end();
     ofDisableBlendMode();
 }

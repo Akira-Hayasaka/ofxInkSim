@@ -13,6 +13,23 @@
 #include "FboPingPong.h"
 #include "BrashIF.h"
 
+#include "AddPigmentShader.h"
+#include "AddWaterShader.h"
+#include "BlockShader.h"
+#include "Collide1Shader.h"
+#include "Collide2Shader.h"
+#include "GapShader.h"
+#include "GetVelDenShader.h"
+#include "GetXYZShader.h"
+#include "GetZShader.h"
+#include "InkFlowShader.h"
+#include "InkSupplyShader.h"
+#include "InkXAmtShader.h"
+#include "InkXFrShader.h"
+#include "InkXToShader.h"
+#include "Stream1Shader.h"
+#include "Stream2Shader.h"
+
 class UniformInfos
 {
 public:
@@ -98,7 +115,8 @@ public:
     DRAWMODE drawMode;
     
     ofxInkSim() { uniforms = ofPtr<UniformInfos>(new UniformInfos); }
-    void setup(int width = ofGetWidth(), int height = ofGetHeight());
+    void setup(int width = ofGetWidth(), int height = ofGetHeight(),
+               string grainPath = "tex/grain.jpg", string alumPath = "tex/alum3.jpg", string pinningPath = "tex/pinning.jpg");
     void update();
     void draw();
     void stroke(vector<StrokeInfo> sis);
@@ -109,7 +127,7 @@ public:
     void clear();
     void setDrawMode(DRAWMODE drawMode);
     void toggleDebug();
-    ofPtr<UniformInfos> getUniformInfo();    
+    ofPtr<UniformInfos> getUniformInfo();
     
 protected:
     
@@ -119,48 +137,30 @@ protected:
     void drawPlane();
     void fillDisorderBuffer();
     
-    void drawPlane(float _width, float _height)
-    {
-        quad.setVertex(0, ofVec3f(0,0,0));
-        quad.setVertex(1, ofVec3f(_width,0,0));
-        quad.setVertex(2, ofVec3f(_width,_height,0));
-        quad.setVertex(3, ofVec3f(0,_height,0));
-        
-        quad.setTexCoord(0, ofVec2f(0,0));
-        quad.setTexCoord(1, ofVec2f(_width,0));
-        quad.setTexCoord(2, ofVec2f(_width,_height));
-        quad.setTexCoord(3, ofVec2f(0,_height));
-        
-        quad.draw();
-    }
-    
-    BrashIF* brush;
-    
     int width;
     int height;
     
     ofVec2f pxSize;
     ofVec2f offset;
     
-    ofShader GAP;
-    ofShader addpigment;
-    ofShader addwater;
-    ofShader block;
-    ofShader collide1;
-    ofShader collide2;
-    ofShader stream1;
-    ofShader stream2;
-    ofShader GetVelDen;
-    ofShader InkSupply;
-    ofShader InkXAmt;
-    ofShader InkXTo;
-    ofShader InkXFr;
-    ofShader InkFlow;
-    ofShader getXYZ;
-    ofShader getZ;
+    GapShader GAP;
+    AddPigmentShader addpigment;
+    AddWaterShader addwater;
+    BlockShader block;
+    Collide1Shader collide1;
+    Collide2Shader collide2;
+    Stream1Shader stream1;
+    Stream2Shader stream2;
+    GetVelDenShader GetVelDen;
+    InkSupplyShader InkSupply;
+    InkXAmtShader InkXAmt;
+    InkXToShader InkXTo;
+    InkXFrShader InkXFr;
+    InkFlowShader InkFlow;
+    GetXYZShader getXYZ;
+    GetZShader getZ;
     ofPtr<UniformInfos> uniforms;
     
-    ofVboMesh quad;
     ofFbo screen;
     ofFbo depositionBuffer;
     ofTexture Grain;
