@@ -32,17 +32,17 @@ public:
                 ofVec2f pxSize,
                 float gamma,
                 float baseMask,
-                ofTexture& SurfInk,
+                ofTexture& surfInk,
                 ofTexture& depositionBuffer,
-                ofTexture& Misc)
+                ofTexture& misc)
     {
         shader.begin();
         shader.setUniform2fv("pxSize", pxSize.getPtr());
         shader.setUniform1f("gamma", gamma);
         shader.setUniform1f("baseMask", baseMask);
-        shader.setUniformTexture("SurfInk", SurfInk, 0);
+        shader.setUniformTexture("SurfInk", surfInk, 0);
         shader.setUniformTexture("WaterSurface", depositionBuffer, 1);
-        shader.setUniformTexture("Misc", Misc, 2);
+        shader.setUniformTexture("Misc", misc, 2);
         drawPlane(w, h);
         shader.end();
     }

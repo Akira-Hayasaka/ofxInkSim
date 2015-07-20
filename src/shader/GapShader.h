@@ -30,15 +30,15 @@ public:
     
     void update(int w, int h,
                 ofVec2f pxSize,
-                ofTexture Grain,
-                ofTexture Alum,
-                ofTexture Pinning)
+                ofTexture grain,
+                ofTexture alum,
+                ofTexture pinning)
     {
         shader.begin();
         shader.setUniform2fv("pxSize", pxSize.getPtr());
-        shader.setUniformTexture("Grain", Grain, 0);
-        shader.setUniformTexture("Alum", Alum, 1);
-        shader.setUniformTexture("Pinning", Pinning, 2);
+        shader.setUniformTexture("Grain", grain, 0);
+        shader.setUniformTexture("Alum", alum, 1);
+        shader.setUniformTexture("Pinning", pinning, 2);
         drawPlane(w, h);
         shader.end();
     }

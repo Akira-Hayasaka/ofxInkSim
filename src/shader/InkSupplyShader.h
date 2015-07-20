@@ -30,15 +30,15 @@ public:
     
     void update(int w, int h,
                 ofVec2f pxSize,
-                ofTexture& VelDen,
-                ofTexture& SurfInk,
-                ofTexture& Misc)
+                ofTexture& velDen,
+                ofTexture& surfInk,
+                ofTexture& misc)
     {
         shader.begin();
         shader.setUniform2fv("pxSize", pxSize.getPtr());
-        shader.setUniformTexture("VelDenMap", VelDen, 0);
-        shader.setUniformTexture("SurfInkMap", SurfInk, 1);
-        shader.setUniformTexture("MiscMap", Misc, 2);
+        shader.setUniformTexture("VelDenMap", velDen, 0);
+        shader.setUniformTexture("SurfInkMap", surfInk, 1);
+        shader.setUniformTexture("MiscMap", misc, 2);
         drawPlane(w, h);
         shader.end();
     }

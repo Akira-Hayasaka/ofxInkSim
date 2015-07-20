@@ -32,9 +32,9 @@ public:
                 ofVec2f pxSize,
                 float advect_p,
                 float omega,
-                ofTexture& VelDen,
-                ofTexture& Dist1,
-                ofTexture& FlowInk)
+                ofTexture& velDen,
+                ofTexture& dist1,
+                ofTexture& flowInk)
     {
         shader.begin();
         shader.setUniform2fv("pxSize", pxSize.getPtr());
@@ -44,9 +44,9 @@ public:
         shader.setUniform1f("D", 0.1666667f);
         shader.setUniform1f("advect_p", advect_p);
         shader.setUniform1f("Omega", omega);
-        shader.setUniformTexture("VelDenMap", VelDen, 0);
-        shader.setUniformTexture("Dist1Map", Dist1, 1);
-        shader.setUniformTexture("InkMap", FlowInk, 2);
+        shader.setUniformTexture("VelDenMap", velDen, 0);
+        shader.setUniformTexture("Dist1Map", dist1, 1);
+        shader.setUniformTexture("InkMap", flowInk, 2);
         drawPlane(w, h);
         shader.end();
     }

@@ -33,7 +33,7 @@ public:
                 float gamma,
                 float baseMask,
                 float waterAmount,
-                ofTexture& Misc,
+                ofTexture& misc,
                 ofTexture& depositionBuffer)
     {
         shader.begin();
@@ -41,7 +41,7 @@ public:
         shader.setUniform1f("gamma", gamma);
         shader.setUniform1f("baseMask", baseMask);
         shader.setUniform1f("waterAmount", waterAmount);
-        shader.setUniformTexture("Misc", Misc, 0);
+        shader.setUniformTexture("Misc", misc, 0);
         shader.setUniformTexture("WaterSurface", depositionBuffer, 1);
         drawPlane(w, h);
         shader.end();

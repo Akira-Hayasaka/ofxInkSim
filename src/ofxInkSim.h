@@ -151,31 +151,31 @@ protected:
     Collide2Shader collide2;
     Stream1Shader stream1;
     Stream2Shader stream2;
-    GetVelDenShader GetVelDen;
-    InkSupplyShader InkSupply;
-    InkXAmtShader InkXAmt;
-    InkXToShader InkXTo;
-    InkXFrShader InkXFr;
-    InkFlowShader InkFlow;
+    GetVelDenShader getVelDen;
+    InkSupplyShader inkSupply;
+    InkXAmtShader inkXAmt;
+    InkXToShader inkXTo;
+    InkXFrShader inkXFr;
+    InkFlowShader inkFlow;
     GetXYZShader getXYZ;
     GetZShader getZ;
     ofPtr<UniformInfos> uniforms;
     
     ofFbo screen;
     ofFbo depositionBuffer;
-    ofTexture Grain;
-    ofTexture Alum;
-    ofTexture Pinning;
-    ofFbo Disorder;
+    ofTexture grain;
+    ofTexture alum;
+    ofTexture pinning;
+    ofFbo disorder;
     
-    FboPingPong Misc;
-    FboPingPong VelDen;
-    FboPingPong Dist1;
-    FboPingPong Dist2;
-    FboPingPong SurfInk;
-    FboPingPong FlowInk;
-    FboPingPong FixInk;
-    FboPingPong SinkInk;
+    FboPingPong misc;
+    FboPingPong velDen;
+    FboPingPong dist1;
+    FboPingPong dist2;
+    FboPingPong surfInk;
+    FboPingPong flowInk;
+    FboPingPong fixInk;
+    FboPingPong sinkInk;
     
     // debug
     bool bDebug;

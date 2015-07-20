@@ -30,13 +30,13 @@ public:
     
     void update(int w, int h,
                 ofVec2f pxSize,
-                ofTexture& FlowInk,
-                ofTexture& SinkInk)
+                ofTexture& flowInk,
+                ofTexture& sinkInk)
     {
         shader.begin();
         shader.setUniform2fv("pxSize", pxSize.getPtr());
-        shader.setUniformTexture("FlowInkMap", FlowInk, 0);
-        shader.setUniformTexture("SinkInkMap", SinkInk, 1);
+        shader.setUniformTexture("FlowInkMap", flowInk, 0);
+        shader.setUniformTexture("SinkInkMap", sinkInk, 1);
         drawPlane(w, h);
         shader.end();
     }

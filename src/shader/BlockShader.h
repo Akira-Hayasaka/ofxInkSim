@@ -37,11 +37,11 @@ public:
                 float toe_p,
                 float omega,
                 ofVec2f offset,
-                ofTexture& Misc,
-                ofTexture& VelDen,
-                ofTexture& FlowInk,
-                ofTexture& FixInk,
-                ofTexture& Disorder)
+                ofTexture& misc,
+                ofTexture& velDen,
+                ofTexture& flowInk,
+                ofTexture& fixInk,
+                ofTexture& disorder)
     {
         shader.begin();
         shader.setUniform2fv("pxSize", pxSize.getPtr());
@@ -54,11 +54,11 @@ public:
         shader.setUniform1f("Omega", omega);
         shader.setUniform1f("Corn_mul", pow(2.0f, 0.5f));
         shader.setUniform2fv("offset", offset.getPtr());
-        shader.setUniformTexture("MiscMap", Misc, 0);
-        shader.setUniformTexture("VelDenMap", VelDen, 1);
-        shader.setUniformTexture("FlowInkMap", FlowInk, 2);
-        shader.setUniformTexture("FixInkMap", FixInk, 3);
-        shader.setUniformTexture("DisorderMap", Disorder, 4);
+        shader.setUniformTexture("MiscMap", misc, 0);
+        shader.setUniformTexture("VelDenMap", velDen, 1);
+        shader.setUniformTexture("FlowInkMap", flowInk, 2);
+        shader.setUniformTexture("FixInkMap", fixInk, 3);
+        shader.setUniformTexture("DisorderMap", disorder, 4);
         drawPlane(w, h);
         shader.end();
     }

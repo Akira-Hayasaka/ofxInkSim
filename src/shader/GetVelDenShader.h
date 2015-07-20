@@ -32,19 +32,19 @@ public:
                 ofVec2f pxSize,
                 float wf_mul,
                 float evapor,
-                ofTexture& Misc,
-                ofTexture& Dist1,
-                ofTexture& Dist2,
-                ofTexture& VelDen)
+                ofTexture& misc,
+                ofTexture& dist1,
+                ofTexture& dist2,
+                ofTexture& velDen)
     {
         shader.begin();
         shader.setUniform2fv("pxSize", pxSize.getPtr());
         shader.setUniform1f("wf_mul", wf_mul);
         shader.setUniform1f("Evapor", evapor);
-        shader.setUniformTexture("MiscMap", Misc, 0);
-        shader.setUniformTexture("Dist1Map", Dist1, 1);
-        shader.setUniformTexture("Dist2Map", Dist2, 2);
-        shader.setUniformTexture("VelDenMap", VelDen, 3);
+        shader.setUniformTexture("MiscMap", misc, 0);
+        shader.setUniformTexture("Dist1Map", dist1, 1);
+        shader.setUniformTexture("Dist2Map", dist2, 2);
+        shader.setUniformTexture("VelDenMap", velDen, 3);
         drawPlane(w, h);
         shader.end();
     }

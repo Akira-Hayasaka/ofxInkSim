@@ -31,18 +31,18 @@ public:
     void update(int w, int h,
                 ofVec2f pxSize,
                 float f1, float f2, float f3,
-                ofTexture& VelDen,
-                ofTexture& Misc,
-                ofTexture& FlowInk,
-                ofTexture& FixInk)
+                ofTexture& velDen,
+                ofTexture& misc,
+                ofTexture& flowInk,
+                ofTexture& fixInk)
     {
         shader.begin();
         shader.setUniform2fv("pxSize", pxSize.getPtr());
         shader.setUniform3f("FixRate", f1, f2, f3);
-        shader.setUniformTexture("VelDenMap", VelDen, 0);
-        shader.setUniformTexture("MiscMap", Misc, 1);
-        shader.setUniformTexture("FlowInkMap", FlowInk, 2);
-        shader.setUniformTexture("FixInkMap", FixInk, 3);
+        shader.setUniformTexture("VelDenMap", velDen, 0);
+        shader.setUniformTexture("MiscMap", misc, 1);
+        shader.setUniformTexture("FlowInkMap", flowInk, 2);
+        shader.setUniformTexture("FixInkMap", fixInk, 3);
         drawPlane(w, h);
         shader.end();
     }

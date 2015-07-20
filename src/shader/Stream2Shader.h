@@ -32,15 +32,15 @@ public:
                 ofVec2f pxSize,
                 float evapor_b,
                 ofVec2f offset,
-                ofTexture& Misc,
-                ofTexture& Dist2)
+                ofTexture& misc,
+                ofTexture& dist2)
     {
         shader.begin();
         shader.setUniform2fv("pxSize", pxSize.getPtr());
         shader.setUniform1f("Evapor_b", evapor_b);
         shader.setUniform2fv("offset", offset.getPtr());
-        shader.setUniformTexture("MiscMap", Misc, 0);
-        shader.setUniformTexture("Dist2Map", Dist2, 1);
+        shader.setUniformTexture("MiscMap", misc, 0);
+        shader.setUniformTexture("Dist2Map", dist2, 1);
         drawPlane(w, h);
         shader.end();
     }

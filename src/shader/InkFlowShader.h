@@ -32,23 +32,23 @@ public:
                 ofVec2f pxSize,
                 float ba1, float ba2,
                 ofVec2f offset,
-                ofTexture& VelDen,
-                ofTexture& Misc,
-                ofTexture& Dist1,
-                ofTexture& Dist2,
-                ofTexture& FlowInk,
-                ofTexture& SurfInk)
+                ofTexture& velDen,
+                ofTexture& misc,
+                ofTexture& dist1,
+                ofTexture& dist2,
+                ofTexture& flowInk,
+                ofTexture& surfInk)
     {
         shader.begin();
         shader.setUniform2fv("pxSize", pxSize.getPtr());
         shader.setUniform2f("Blk_a", ba1, ba2);
         shader.setUniform2fv("offset", offset.getPtr());
-        shader.setUniformTexture("VelDenMap", VelDen, 0);
-        shader.setUniformTexture("MiscMap", Misc, 1);
-        shader.setUniformTexture("Dist1Map", Dist1, 2);
-        shader.setUniformTexture("Dist2Map", Dist2, 3);
-        shader.setUniformTexture("FlowInkMap", FlowInk, 4);
-        shader.setUniformTexture("SurfInkMap", SurfInk, 5);
+        shader.setUniformTexture("VelDenMap", velDen, 0);
+        shader.setUniformTexture("MiscMap", misc, 1);
+        shader.setUniformTexture("Dist1Map", dist1, 2);
+        shader.setUniformTexture("Dist2Map", dist2, 3);
+        shader.setUniformTexture("FlowInkMap", flowInk, 4);
+        shader.setUniformTexture("SurfInkMap", surfInk, 5);
         drawPlane(w, h);
         shader.end();
     }
