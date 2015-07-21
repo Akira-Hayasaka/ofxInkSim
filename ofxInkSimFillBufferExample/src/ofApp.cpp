@@ -8,6 +8,7 @@ void ofApp::setup()
     gui.setup(inkSim.getUniformInfo());
 
     fbo.allocate(ofGetWidth(), ofGetHeight());
+    ofLoadImage(test, "imgs/Primatenskelett-drawing-transparent.png");
 }
 
 void ofApp::update()
@@ -20,7 +21,7 @@ void ofApp::draw()
     inkSim.draw();
     gui.draw();
     
-    ofDrawBitmapStringHighlight("press 'f' to fill buffer", 10, ofGetHeight() - 60);
+    ofDrawBitmapStringHighlight("press 'f' or 't' to fill buffer", 10, ofGetHeight() - 60);
     ofDrawBitmapStringHighlight("press 'c' to clear buffer", 10, ofGetHeight() - 40);
     ofDrawBitmapStringHighlight("press ' ' to hide gui", 10, ofGetHeight() - 20);
 }
@@ -88,6 +89,15 @@ void ofApp::keyPressed(int key)
         
         inkSim.begin();
         fbo.draw(0, 0);
+        inkSim.end();
+    }
+    
+    if (key == 't')
+    {
+        inkSim.begin();
+        ofPushStyle();
+        test.draw(0, 0);
+        ofPopStyle();
         inkSim.end();
     }
 }

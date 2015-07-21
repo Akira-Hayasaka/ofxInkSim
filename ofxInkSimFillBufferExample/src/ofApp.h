@@ -28,4 +28,5 @@ private:
     ofxInkSim inkSim;
     
     ofFbo fbo;
+    ofTexture test;
 };

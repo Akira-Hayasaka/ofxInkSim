@@ -11,5 +11,6 @@ refs.
 http://forum.openframeworks.cc/t/ofxinksim-ink-deposition-simulator/19611
 http://visgraph.cse.ust.hk/MoXi/
 
+![ofxInkSim](https://github.com/Akira-Hayasaka/ofxInkSim/raw/master/redmeimg/e.png)
 ![ofxInkSim](https://github.com/Akira-Hayasaka/ofxInkSim/raw/master/redmeimg/c.png)
 ![ofxInkSim](https://github.com/Akira-Hayasaka/ofxInkSim/raw/master/redmeimg/d.png)
