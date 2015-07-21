@@ -22,7 +22,8 @@ void ofApp::draw()
 
 void ofApp::mouseDragged(int x, int y, int button)
 {
-    inkSim.stroke(&brush, x, y, moodmachine);
+    ofColor c = moodmachine;
+    inkSim.stroke(&brush, x, y, getInkColor(c.getHueAngle(), 255, 10));
 }
 
 void ofApp::mouseReleased(int x, int y, int button)
