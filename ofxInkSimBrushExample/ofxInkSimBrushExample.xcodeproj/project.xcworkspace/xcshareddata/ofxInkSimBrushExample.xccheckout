@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1D30AA5A-2885-4F8A-AD73-DC6251976ED1</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ofxInkSimBrushExample</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>4A64B9BC7CC86E8C70E97E6A25159E1237C669F1</key>
+		<string>github.com:Akira-Hayasaka/ofxInkSim.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ofxInkSimBrushExample/ofxInkSimBrushExample.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>4A64B9BC7CC86E8C70E97E6A25159E1237C669F1</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:Akira-Hayasaka/ofxInkSim.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>4A64B9BC7CC86E8C70E97E6A25159E1237C669F1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4A64B9BC7CC86E8C70E97E6A25159E1237C669F1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxInkSim</string>
+		</dict>
+	</array>
+</dict>
+</plist>

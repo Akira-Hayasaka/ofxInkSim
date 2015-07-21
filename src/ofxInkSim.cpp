@@ -335,6 +335,25 @@ void ofxInkSim::clear()
     sinkInk.clear(0);
 }
 
+void ofxInkSim::begin()
+{
+    ofEnableBlendMode(OF_BLENDMODE_SCREEN);
+    
+    depositionBuffer.begin();
+    ofClear(0, 0);
+    ofPushStyle();
+}
+
+void ofxInkSim::end()
+{
+    ofPopStyle();
+    depositionBuffer.end();
+    
+    ofDisableBlendMode();
+    
+    depositeOnPaperSurface();
+}
+
 void ofxInkSim::setDrawMode(DRAWMODE drawMode)
 {
     this->drawMode = drawMode;

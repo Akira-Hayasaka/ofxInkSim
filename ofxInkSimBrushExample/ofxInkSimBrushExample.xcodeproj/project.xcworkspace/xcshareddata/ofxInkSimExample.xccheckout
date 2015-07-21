@@ -14,7 +14,7 @@
 		<string>github.com:Akira-Hayasaka/ofxInkSim.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ofxInkSimExample/ofxInkSimExample.xcodeproj</string>
+	<string>ofxInkSimBrushExample/ofxInkSimExample.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>4A64B9BC7CC86E8C70E97E6A25159E1237C669F1</key>

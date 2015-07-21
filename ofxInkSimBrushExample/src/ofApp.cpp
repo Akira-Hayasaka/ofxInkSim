@@ -18,6 +18,9 @@ void ofApp::draw()
 {
     inkSim.draw();
     gui.draw();
+    
+    ofDrawBitmapStringHighlight("drag mouse to stroke", 10, ofGetHeight() - 40);
+    ofDrawBitmapStringHighlight("press ' ' to hide gui", 10, ofGetHeight() - 20);
 }
 
 void ofApp::mouseDragged(int x, int y, int button)

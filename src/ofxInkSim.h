@@ -54,13 +54,13 @@ public:
         parameters.add(p3.set("pinw_pindisorder(g,p,step(0,toe,glue))", p3, 0.00000, 1.00000));
         parameters.add(omega.set("omega", omega, 0.00000, 1.00000)); // block, collide1, collide2
         parameters.add(advect_p.set("advect_p", advect_p, 0.00000, 1.00000)); // block, collide1, collide2
-        parameters.add(evapor.set("evapor", evapor, 0.00000, 0.01000)); // velden, stream1, stream2
-        parameters.add(evapor_b.set("evapor_b", evapor_b, 0.00000, 0.00100)); // stream1, stream2
-        parameters.add(ba1.set("blka_lowest_hindrance_rate", ba1, 0.00000, 0.00010)); // inkflow
-        parameters.add(ba2.set("blka_blocking_advection_when_flow_speed_low", ba2, 0.00000, 0.00010)); // inkflow
-        parameters.add(f1.set("fixrate_base_fix_factor", f1, 0.00000, 0.01000)); // inkxamt
-        parameters.add(f2.set("fixrate_modulating_dryness_glue1", f2, 0.00000, 0.10000));  // inkxamt
-        parameters.add(f3.set("fixrate_modulating_dryness_glue2", f3, 0.00000, 0.10000));  // inkxamt
+        parameters.add(evapor.set("evapor", evapor, 0.00000, 1.00000)); // velden, stream1, stream2
+        parameters.add(evapor_b.set("evapor_b", evapor_b, 0.00000, 1.00000)); // stream1, stream2
+        parameters.add(ba1.set("blka_lowest_hindrance_rate", ba1, 0.00000, 1.00000)); // inkflow
+        parameters.add(ba2.set("blka_blocking_advection_when_flow_speed_low", ba2, 0.00000, 1.00000)); // inkflow
+        parameters.add(f1.set("fixrate_base_fix_factor", f1, 0.00000, 1.00000)); // inkxamt
+        parameters.add(f2.set("fixrate_modulating_dryness_glue1", f2, 0.00000, 1.00000));  // inkxamt
+        parameters.add(f3.set("fixrate_modulating_dryness_glue2", f3, 0.00000, 1.00000));  // inkxamt
     }
     
     void resetToSystemDefault()
@@ -147,6 +147,8 @@ public:
     void stroke(BrashIF* brush, int x, int y, ofColor brushCol, float brushSize);
     void stopStroke(vector<StrokeInfo> sis);
     void stopStroke(BrashIF* brush);
+    void begin();
+    void end();
     void clear();
     void setDrawMode(DRAWMODE drawMode);
     void toggleDebug();

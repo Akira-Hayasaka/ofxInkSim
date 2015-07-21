@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-               BuildableName = "ofxInkSimExample.app"
-               BlueprintName = "ofxInkSimExample"
-               ReferencedContainer = "container:ofxInkSimExample.xcodeproj">
+               BuildableName = "ofxInkSimFillBufferExample.app"
+               BlueprintName = "ofxInkSimFillBufferExample"
+               ReferencedContainer = "container:ofxInkSimFillBufferExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "ofxInkSimExample.app"
-            BlueprintName = "ofxInkSimExample"
-            ReferencedContainer = "container:ofxInkSimExample.xcodeproj">
+            BuildableName = "ofxInkSimFillBufferExample.app"
+            BlueprintName = "ofxInkSimFillBufferExample"
+            ReferencedContainer = "container:ofxInkSimFillBufferExample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -48,13 +48,14 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "ofxInkSimExample.app"
-            BlueprintName = "ofxInkSimExample"
-            ReferencedContainer = "container:ofxInkSimExample.xcodeproj">
+            BuildableName = "ofxInkSimFillBufferExample.app"
+            BlueprintName = "ofxInkSimFillBufferExample"
+            ReferencedContainer = "container:ofxInkSimFillBufferExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -66,13 +67,14 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "ofxInkSimExample.app"
-            BlueprintName = "ofxInkSimExample"
-            ReferencedContainer = "container:ofxInkSimExample.xcodeproj">
+            BuildableName = "ofxInkSimFillBufferExample.app"
+            BlueprintName = "ofxInkSimFillBufferExample"
+            ReferencedContainer = "container:ofxInkSimFillBufferExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
