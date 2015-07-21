@@ -12,18 +12,12 @@ void ofApp::setup()
 void ofApp::update()
 {
     inkSim.update();
-    gui.update();
 }
 
 void ofApp::draw()
 {
     inkSim.draw();
     gui.draw();
-}
-
-void ofApp::exit()
-{
-    gui.exit();
 }
 
 void ofApp::mouseDragged(int x, int y, int button)
@@ -65,14 +59,6 @@ void ofApp::keyPressed(int key)
     else if (key == 'r')
     {
         gui.resetToDefault();
-    }
-    else if (key == 'f')
-    {
-        gui.resetToSavedFile();
-    }
-    else if (key == 's')
-    {
-        gui.saveToFile();
     }
     else if (key == 'c')
     {

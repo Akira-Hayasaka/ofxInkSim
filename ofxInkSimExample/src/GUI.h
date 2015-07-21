@@ -10,7 +10,7 @@
 #define __emptyExample__GUI__
 
 #include "ofMain.h"
-#include "ofxUI.h"
+#include "ofxGui.h"
 #include "ofxInkSim.h"
 
 class GUI
@@ -18,19 +18,16 @@ class GUI
 public:
     
     void setup(ofPtr<UniformInfos> uniforms);
-    void update();
     void draw();
     void toggleVisible();
-    void exit();
     void resetToDefault();
-    void resetToSavedFile();
-    void saveToFile();
     
 private:
     
     bool bGUIHide;
     
-    ofxUISuperCanvas *gui;
+    ofxPanel gui;
+    ofXml settings;
     ofPtr<UniformInfos> uniforms;
 };
 

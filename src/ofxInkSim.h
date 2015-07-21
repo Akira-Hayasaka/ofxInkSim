@@ -37,60 +37,83 @@ public:
     UniformInfos()
     {
         resetToSystemDefault();
+        
+        parameters.setName("shader uniforms");
+        parameters.add(brushsize.set("brushsize", brushsize, 1.0, 50.0));
+        parameters.add(waterAmount.set("waterAmount", waterAmount, 0.00000, 2.00000)); // water
+        parameters.add(gamma.set("gamma", gamma, 0.00000, 1.00000)); // pigment, water
+        parameters.add(baseMask.set("baseMask", baseMask, 0.00000, 1.00000)); // pigment, water
+        parameters.add(toe_p.set("toe_p", toe_p, 0.00000, 1.00000)); // block
+        parameters.add(b11.set("blk1_default", b11, 0.00000, 1.00000)); // block
+        parameters.add(b12.set("blk1_grain", b12, 0.00000, 1.00000)); // block
+        parameters.add(b13.set("blk1_alum", b13, 0.00000, 1.00000)); // block
+        parameters.add(b21.set("blk2_glue", b21, 0.00000, 1.00000)); // block
+        parameters.add(b22.set("blk2_fixblk", b22, 0.00000, 1.00000)); // block
+        parameters.add(p1.set("pinw_default", p1, 0.00000, 1.00000)); // block
+        parameters.add(p2.set("pinw_fixblk", p2, 0.00000, 1.00000)); // block
+        parameters.add(p3.set("pinw_pindisorder(g,p,step(0,toe,glue))", p3, 0.00000, 1.00000));
+        parameters.add(omega.set("omega", omega, 0.00000, 1.00000)); // block, collide1, collide2
+        parameters.add(advect_p.set("advect_p", advect_p, 0.00000, 1.00000)); // block, collide1, collide2
+        parameters.add(evapor.set("evapor", evapor, 0.00000, 0.01000)); // velden, stream1, stream2
+        parameters.add(evapor_b.set("evapor_b", evapor_b, 0.00000, 0.00100)); // stream1, stream2
+        parameters.add(ba1.set("blka_lowest_hindrance_rate", ba1, 0.00000, 0.00010)); // inkflow
+        parameters.add(ba2.set("blka_blocking_advection_when_flow_speed_low", ba2, 0.00000, 0.00010)); // inkflow
+        parameters.add(f1.set("fixrate_base_fix_factor", f1, 0.00000, 0.01000)); // inkxamt
+        parameters.add(f2.set("fixrate_modulating_dryness_glue1", f2, 0.00000, 0.10000));  // inkxamt
+        parameters.add(f3.set("fixrate_modulating_dryness_glue2", f3, 0.00000, 0.10000));  // inkxamt
     }
     
     void resetToSystemDefault()
     {
-        brushsize = 10.0f;
-        baseMask = 0.4f;
-        gamma = 0.8f;
-        omega = 0.5f;
-        advect_p = 0.1f;
-        evapor_b = 1E-05f;
-        evapor = 0.0005f;
-        b11 = 0.0f;
-        b12 = 0.1f;
-        b13 = 0.05f;
-        b21 = 0.0f;
-        b22 = 0.0f;
-        p1 = 0.0f;
-        p2 = 0.3f;
-        p3 = 0.2f;
-        ba1 = 0.0f;
-        ba2 = 1E-09f;
-        f1 = 0.001f;
-        f2 = 0.09f;
-        //    f3 = 1E-05f;
-        f3 = 0.09f;
-        toe_p = 0.1f;
-        waterAmount = 1.0f;
+        brushsize = 7.086956501;
+        baseMask = 0.037267081;
+        gamma = 0.037267081;
+        omega = 0.968944073;
+        advect_p = 0.100000001;
+        evapor_b = 0.000010000;
+        evapor = 0.000500000;
+        b11 = 0.009316770;
+        b12 = 0.391304344;
+        b13 = 0.009316770;
+        b21 = 0.123152710;
+        b22 = 0.307453424;
+        p1 = 0.000000000;
+        p2 = 0.300000012;
+        p3 = 0.200000003;
+        ba1 = 0.000040994;
+        ba2 = 0.000043168;
+        f1 = 0.010000000;
+        f2 = 0.090000004;
+        f3 = 0.090000004;
+        toe_p = 0.100000001;
+        waterAmount = 1.000000000;
         wf_mul = 1.0f;
-        brushsize = 10.0f;
     }
     
-    float brushsize;
-    float baseMask;
-    float gamma;
-    float omega;
-    float advect_p;
-    float evapor_b;
-    float evapor;
-    float b11;
-    float b12;
-    float b13;
-    float b21;
-    float b22;
-    float p1;
-    float p2;
-    float p3;
-    float ba1;
-    float ba2;
-    float f1;
-    float f2;
-    float f3;
-    float toe_p;
-    float waterAmount;
-    float wf_mul;
+    ofParameterGroup parameters;
+    ofParameter<float> brushsize;
+    ofParameter<float> baseMask;
+    ofParameter<float> gamma;
+    ofParameter<float> omega;
+    ofParameter<float> advect_p;
+    ofParameter<float> evapor_b;
+    ofParameter<float> evapor;
+    ofParameter<float> b11;
+    ofParameter<float> b12;
+    ofParameter<float> b13;
+    ofParameter<float> b21;
+    ofParameter<float> b22;
+    ofParameter<float> p1;
+    ofParameter<float> p2;
+    ofParameter<float> p3;
+    ofParameter<float> ba1;
+    ofParameter<float> ba2;
+    ofParameter<float> f1;
+    ofParameter<float> f2;
+    ofParameter<float> f3;
+    ofParameter<float> toe_p;
+    ofParameter<float> waterAmount;
+    ofParameter<float> wf_mul;
 };
 
 struct StrokeInfo
