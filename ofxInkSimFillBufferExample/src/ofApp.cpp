@@ -87,6 +87,36 @@ void ofApp::keyPressed(int key)
         }
         fbo.end();
         
+//        fbo.begin();
+//        ofClear(0);
+//        for (int i = 0; i < 100; i++)
+//        {
+//            int ang = ofRandom(angMin, angRange);
+//            if (ang > 360)
+//                ang -= 360;
+//            
+//            float rad = ofRandom(10, 20);
+//            
+//            for (int j = 0; j < 10; j++)
+//            {
+//                float iteRad = ofMap(j, 0, 10, rad/10, rad, true);
+//                float iteAng = ang;// + ofRandom(-10, 10);
+//                
+//                if (iteAng < 0)
+//                    iteAng += 360;
+//                else if (iteAng > 360)
+//                    iteAng -= 360;
+//                
+//                float depth = 255;
+//                ofColor c = getInkColor(iteAng, 255, depth);
+//                ofPushStyle();
+//                ofSetColor(c);
+//                ofCircle(ofRandomWidth(), ofRandomHeight(), iteRad);
+//                ofPopStyle();
+//            }
+//        }
+//        fbo.end();
+        
         inkSim.begin();
         fbo.draw(0, 0);
         inkSim.end();
@@ -95,9 +125,7 @@ void ofApp::keyPressed(int key)
     if (key == 't')
     {
         inkSim.begin();
-        ofPushStyle();
         test.draw(0, 0);
-        ofPopStyle();
         inkSim.end();
     }
 }
