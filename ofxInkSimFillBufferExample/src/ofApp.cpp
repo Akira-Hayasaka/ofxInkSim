@@ -8,7 +8,17 @@ void ofApp::setup()
     gui.setup(inkSim.getUniformInfo());
 
     fbo.allocate(ofGetWidth(), ofGetHeight());
-    ofLoadImage(test, "imgs/Primatenskelett-drawing-transparent.png");
+    
+    ofDirectory dir;
+    dir.open("imgs");
+    dir.listDir();
+    tests.resize(dir.size());
+    for (int i = 0; i < dir.size(); i++)
+    {
+        string path = dir.getFile(i).getAbsolutePath();
+        ofLoadImage(tests.at(i), path);
+    }
+    dir.close();
 }
 
 void ofApp::update()
@@ -124,9 +134,22 @@ void ofApp::keyPressed(int key)
     
     if (key == 't')
     {
+        ofColor c = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
+        float depth = ofRandom(50, 100);
+        
+        int brush = ofRandom(tests.size());
+        
+        ofSetRectMode(OF_RECTMODE_CENTER);
         inkSim.begin();
-        test.draw(0, 0);
+        ofPushMatrix();
+        ofTranslate(ofRandomWidth(), ofRandomHeight(), ofRandom(0, -1500));
+        ofPushStyle();
+        ofSetColor(getInkColor(c.getHueAngle(), 255, 255));
+        tests.at(brush).draw(0, 0);
+        ofPopStyle();
+        ofPopMatrix();
         inkSim.end();
+        ofSetRectMode(OF_RECTMODE_CORNER);
     }
 }
 

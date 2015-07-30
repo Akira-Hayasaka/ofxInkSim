@@ -28,5 +28,5 @@ private:
     ofxInkSim inkSim;
     
     ofFbo fbo;
-    ofTexture test;
+    vector<ofTexture> tests;
 };

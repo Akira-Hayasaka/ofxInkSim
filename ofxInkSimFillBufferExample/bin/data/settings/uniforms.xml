@@ -1,8 +1,8 @@
 <shader_uniforms>
 	<brushsize>7.08696</brushsize>
-	<waterAmount>0.99004</waterAmount>
-	<gamma>0.0372671</gamma>
-	<baseMask>0.0372671</baseMask>
+	<waterAmount>0.966135</waterAmount>
+	<gamma>0.961155</gamma>
+	<baseMask>0.961155</baseMask>
 	<toe_p>0.00398406</toe_p>
 	<blk1_default>0.0059761</blk1_default>
 	<blk1_grain>0.0209163</blk1_grain>
