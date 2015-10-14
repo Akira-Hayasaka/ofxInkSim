@@ -140,7 +140,7 @@ public:
     ofxInkSim() { uniforms = ofPtr<UniformInfos>(new UniformInfos); }
     void setup(int width = ofGetWidth(), int height = ofGetHeight(),
                string grainPath = "tex/grain.jpg", string alumPath = "tex/alum3.jpg", string pinningPath = "tex/pinning.jpg");
-    void update();
+    void update(bool bEvaporToDisapper = false);
     void draw();
     void stroke(vector<StrokeInfo> sis);
     void stroke(BrashIF* brush, int x, int y, ofColor brushCol);

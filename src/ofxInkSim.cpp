@@ -58,7 +58,7 @@ void ofxInkSim::setup(int width, int height,
     bDebug = false;
 }
 
-void ofxInkSim::update()
+void ofxInkSim::update(bool bEvaporToDisapper)
 {
     misc.getNewTex()->begin();
     block.update(width, height,
@@ -155,7 +155,9 @@ void ofxInkSim::update()
     inkXTo.update(width, height,
                   pxSize,
                   fixInk.getOldTex()->getTextureReference(),
-                  sinkInk.getOldTex()->getTextureReference());
+                  sinkInk.getOldTex()->getTextureReference(),
+                  flowInk.getOldTex()->getTextureReference(),
+                  (bEvaporToDisapper) ? 1.0 : 0.0);
     fixInk.getNewTex()->end();
     fixInk.swap();
     
