@@ -20,7 +20,7 @@ public:
     
     InkShader()
     {
-        if (ofGetGLProgrammableRenderer())
+        if (ofIsGLProgrammableRenderer())
         {
             isProgrammableRenderer = true;
         }
