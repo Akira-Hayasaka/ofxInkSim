@@ -1,2 +1,3 @@
 ofxGui
 ofxInkSim
+addons/ofxMoodMachine
