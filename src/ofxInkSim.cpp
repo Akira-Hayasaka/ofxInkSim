@@ -70,11 +70,11 @@ void ofxInkSim::update(bool bEvaporToDisapper)
                  uniforms->toe_p,
                  uniforms->omega,
                  offset,
-                 misc.getOldTex()->getTextureReference(),
-                 velDen.getOldTex()->getTextureReference(),
-                 flowInk.getOldTex()->getTextureReference(),
-                 fixInk.getOldTex()->getTextureReference(),
-                 disorder.getTextureReference());
+                 misc.getOldTex()->getTexture(),
+                 velDen.getOldTex()->getTexture(),
+                 flowInk.getOldTex()->getTexture(),
+                 fixInk.getOldTex()->getTexture(),
+                 disorder.getTexture());
     misc.getNewTex()->end();
     misc.swap();
     
@@ -83,9 +83,9 @@ void ofxInkSim::update(bool bEvaporToDisapper)
                     pxSize,
                     uniforms->advect_p,
                     uniforms->omega,
-                    velDen.getOldTex()->getTextureReference(),
-                    dist1.getOldTex()->getTextureReference(),
-                    flowInk.getOldTex()->getTextureReference());
+                    velDen.getOldTex()->getTexture(),
+                    dist1.getOldTex()->getTexture(),
+                    flowInk.getOldTex()->getTexture());
     dist1.getNewTex()->end();
     dist1.swap();
     
@@ -94,9 +94,9 @@ void ofxInkSim::update(bool bEvaporToDisapper)
                     pxSize,
                     uniforms->advect_p,
                     uniforms->omega,
-                    velDen.getOldTex()->getTextureReference(),
-                    dist2.getOldTex()->getTextureReference(),
-                    flowInk.getOldTex()->getTextureReference());
+                    velDen.getOldTex()->getTexture(),
+                    dist2.getOldTex()->getTexture(),
+                    flowInk.getOldTex()->getTexture());
     dist2.getNewTex()->end();
     dist2.swap();
     
@@ -105,8 +105,8 @@ void ofxInkSim::update(bool bEvaporToDisapper)
                    pxSize,
                    uniforms->evapor_b,
                    offset,
-                   misc.getOldTex()->getTextureReference(),
-                   dist1.getOldTex()->getTextureReference());
+                   misc.getOldTex()->getTexture(),
+                   dist1.getOldTex()->getTexture());
     dist1.getNewTex()->end();
     dist1.swap();
     
@@ -115,8 +115,8 @@ void ofxInkSim::update(bool bEvaporToDisapper)
                    pxSize,
                    uniforms->evapor_b,
                    offset,
-                   misc.getOldTex()->getTextureReference(),
-                   dist2.getOldTex()->getTextureReference());
+                   misc.getOldTex()->getTexture(),
+                   dist2.getOldTex()->getTexture());
     dist2.getNewTex()->end();
     dist2.swap();
     
@@ -124,19 +124,19 @@ void ofxInkSim::update(bool bEvaporToDisapper)
     getVelDen.update(width, height,
                      pxSize,
                      uniforms->wf_mul,
-                     uniforms->evapor, misc.getOldTex()->getTextureReference(),
-                     dist1.getOldTex()->getTextureReference(),
-                     dist2.getOldTex()->getTextureReference(),
-                     velDen.getOldTex()->getTextureReference());
+                     uniforms->evapor, misc.getOldTex()->getTexture(),
+                     dist1.getOldTex()->getTexture(),
+                     dist2.getOldTex()->getTexture(),
+                     velDen.getOldTex()->getTexture());
     velDen.getNewTex()->end();
     velDen.swap();
     
     surfInk.getNewTex()->begin();
     inkSupply.update(width, height,
                      pxSize,
-                     velDen.getOldTex()->getTextureReference(),
-                     surfInk.getOldTex()->getTextureReference(),
-                     misc.getOldTex()->getTextureReference());
+                     velDen.getOldTex()->getTexture(),
+                     surfInk.getOldTex()->getTexture(),
+                     misc.getOldTex()->getTexture());
     surfInk.getNewTex()->end();
     surfInk.swap();
     
@@ -144,19 +144,19 @@ void ofxInkSim::update(bool bEvaporToDisapper)
     inkXAmt.update(width, height,
                    pxSize,
                    uniforms->f1, uniforms->f2, uniforms->f3,
-                   velDen.getOldTex()->getTextureReference(),
-                   misc.getOldTex()->getTextureReference(),
-                   flowInk.getOldTex()->getTextureReference(),
-                   fixInk.getOldTex()->getTextureReference());
+                   velDen.getOldTex()->getTexture(),
+                   misc.getOldTex()->getTexture(),
+                   flowInk.getOldTex()->getTexture(),
+                   fixInk.getOldTex()->getTexture());
     sinkInk.getNewTex()->end();
     sinkInk.swap();
     
     fixInk.getNewTex()->begin();
     inkXTo.update(width, height,
                   pxSize,
-                  fixInk.getOldTex()->getTextureReference(),
-                  sinkInk.getOldTex()->getTextureReference(),
-                  flowInk.getOldTex()->getTextureReference(),
+                  fixInk.getOldTex()->getTexture(),
+                  sinkInk.getOldTex()->getTexture(),
+                  flowInk.getOldTex()->getTexture(),
                   (bEvaporToDisapper) ? 1.0 : 0.0);
     fixInk.getNewTex()->end();
     fixInk.swap();
@@ -164,8 +164,8 @@ void ofxInkSim::update(bool bEvaporToDisapper)
     flowInk.getNewTex()->begin();
     inkXFr.update(width, height,
                   pxSize,
-                  flowInk.getOldTex()->getTextureReference(),
-                  sinkInk.getOldTex()->getTextureReference());
+                  flowInk.getOldTex()->getTexture(),
+                  sinkInk.getOldTex()->getTexture());
     flowInk.getNewTex()->end();
     flowInk.swap();
     
@@ -174,12 +174,12 @@ void ofxInkSim::update(bool bEvaporToDisapper)
                    pxSize,
                    uniforms->ba1, uniforms->ba2,
                    offset,
-                   velDen.getOldTex()->getTextureReference(),
-                   misc.getOldTex()->getTextureReference(),
-                   dist1.getOldTex()->getTextureReference(),
-                   dist2.getOldTex()->getTextureReference(),
-                   flowInk.getOldTex()->getTextureReference(),
-                   surfInk.getOldTex()->getTextureReference());
+                   velDen.getOldTex()->getTexture(),
+                   misc.getOldTex()->getTexture(),
+                   dist1.getOldTex()->getTexture(),
+                   dist2.getOldTex()->getTexture(),
+                   flowInk.getOldTex()->getTexture(),
+                   surfInk.getOldTex()->getTexture());
     flowInk.getNewTex()->end();
     flowInk.swap();
 }
@@ -190,22 +190,22 @@ void ofxInkSim::draw()
     if (drawMode == INKFIX)
     {
         whatdraw = "INKFIX";
-        drawXYZ(fixInk.getOldTex()->getTextureReference(), 0, 0, width, height);
+        drawXYZ(fixInk.getOldTex()->getTexture(), 0, 0, width, height);
     }
     else if (drawMode == INKSURF)
     {
         whatdraw = "INKSURF";
-        drawXYZ(surfInk.getOldTex()->getTextureReference(), 0, 0, width, height);
+        drawXYZ(surfInk.getOldTex()->getTexture(), 0, 0, width, height);
     }
     else if (drawMode == INKFLOW)
     {
         whatdraw = "INKFLOW";
-        drawXYZ(flowInk.getOldTex()->getTextureReference(), 0, 0, width, height);
+        drawXYZ(flowInk.getOldTex()->getTexture(), 0, 0, width, height);
     }
     else if (drawMode == WATERFLOW)
     {
         whatdraw = "WATERFLOW";
-        drawZ(velDen.getOldTex()->getTextureReference(), 0, 0, width, height);
+        drawZ(velDen.getOldTex()->getTexture(), 0, 0, width, height);
     }
     
     if (bDebug)
@@ -213,14 +213,14 @@ void ofxInkSim::draw()
         int w = width/8;
         int h = height/8;
         
-        drawXYZ(surfInk.getOldTex()->getTextureReference(), 0, 0, w, h);
-        drawXYZ(misc.getOldTex()->getTextureReference(), w*1, 0, w, h);
-        drawXYZ(velDen.getOldTex()->getTextureReference(), w*2, 0, w, h);
-        drawXYZ(flowInk.getOldTex()->getTextureReference(), w*3, 0, w, h);
-        drawXYZ(fixInk.getOldTex()->getTextureReference(), w*4, 0, w, h);
-        drawXYZ(dist1.getOldTex()->getTextureReference(), w*5, 0, w, h);
-        drawXYZ(dist2.getOldTex()->getTextureReference(), w*6, 0, w, h);
-        drawXYZ(sinkInk.getOldTex()->getTextureReference(), w*7, 0, w, h);
+        drawXYZ(surfInk.getOldTex()->getTexture(), 0, 0, w, h);
+        drawXYZ(misc.getOldTex()->getTexture(), w*1, 0, w, h);
+        drawXYZ(velDen.getOldTex()->getTexture(), w*2, 0, w, h);
+        drawXYZ(flowInk.getOldTex()->getTexture(), w*3, 0, w, h);
+        drawXYZ(fixInk.getOldTex()->getTexture(), w*4, 0, w, h);
+        drawXYZ(dist1.getOldTex()->getTexture(), w*5, 0, w, h);
+        drawXYZ(dist2.getOldTex()->getTexture(), w*6, 0, w, h);
+        drawXYZ(sinkInk.getOldTex()->getTexture(), w*7, 0, w, h);
         
         ofDrawBitmapStringHighlight("SurfInk OLD", 0, 15);
         ofDrawBitmapStringHighlight("Misc OLD", w*1, 15);
@@ -235,16 +235,16 @@ void ofxInkSim::draw()
         grain.draw(w*1, h, w, h);
         alum.draw(w*2, h, w, h);
         pinning.draw(w*3, h, w, h);
-        drawXYZ(disorder.getTextureReference(), w*4, h, w, h);
+        drawXYZ(disorder.getTexture(), w*4, h, w, h);
         
-        drawXYZ(surfInk.getNewTex()->getTextureReference(), 0, height - h, w, h);
-        drawXYZ(misc.getNewTex()->getTextureReference(), w*1, height - h, w, h);
-        drawXYZ(velDen.getNewTex()->getTextureReference(), w*2, height - h, w, h);
-        drawXYZ(flowInk.getNewTex()->getTextureReference(), w*3, height - h, w, h);
-        drawXYZ(fixInk.getNewTex()->getTextureReference(), w*4, height - h, w, h);
-        drawXYZ(dist1.getNewTex()->getTextureReference(), w*5, height - h, w, h);
-        drawXYZ(dist2.getNewTex()->getTextureReference(), w*6, height - h, w, h);
-        drawXYZ(sinkInk.getNewTex()->getTextureReference(), w*7, height - h, w, h);
+        drawXYZ(surfInk.getNewTex()->getTexture(), 0, height - h, w, h);
+        drawXYZ(misc.getNewTex()->getTexture(), w*1, height - h, w, h);
+        drawXYZ(velDen.getNewTex()->getTexture(), w*2, height - h, w, h);
+        drawXYZ(flowInk.getNewTex()->getTexture(), w*3, height - h, w, h);
+        drawXYZ(fixInk.getNewTex()->getTexture(), w*4, height - h, w, h);
+        drawXYZ(dist1.getNewTex()->getTexture(), w*5, height - h, w, h);
+        drawXYZ(dist2.getNewTex()->getTexture(), w*6, height - h, w, h);
+        drawXYZ(sinkInk.getNewTex()->getTexture(), w*7, height - h, w, h);
         
         ofDrawBitmapStringHighlight("SurfInk NEW", 0, height - h);
         ofDrawBitmapStringHighlight("Misc NEW", w*1, height - h);
@@ -376,9 +376,9 @@ void ofxInkSim::depositeOnPaperSurface()
                       pxSize,
                       uniforms->gamma,
                       uniforms->baseMask,
-                      surfInk.getOldTex()->getTextureReference(),
-                      depositionBuffer.getTextureReference(),
-                      misc.getOldTex()->getTextureReference());
+                      surfInk.getOldTex()->getTexture(),
+                      depositionBuffer.getTexture(),
+                      misc.getOldTex()->getTexture());
     surfInk.getNewTex()->end();
     surfInk.swap();
     
@@ -389,8 +389,8 @@ void ofxInkSim::depositeOnPaperSurface()
                     uniforms->gamma,
                     uniforms->baseMask,
                     uniforms->waterAmount,
-                    misc.getOldTex()->getTextureReference(),
-                    depositionBuffer.getTextureReference());
+                    misc.getOldTex()->getTexture(),
+                    depositionBuffer.getTexture());
     misc.getNewTex()->end();
     misc.swap();
     
