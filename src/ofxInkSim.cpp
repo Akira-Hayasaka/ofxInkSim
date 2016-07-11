@@ -417,11 +417,12 @@ void ofxInkSim::drawZ(ofTexture& texRef, float x, float y, float w, float h)
 
 void ofxInkSim::fillDisorderBuffer()
 {
+    ofStyle style = ofGetStyle();
     ofEnableBlendMode(OF_BLENDMODE_SCREEN);
     disorder.begin();
     GAP.update(width, height, pxSize, grain, alum, pinning);
     disorder.end();
-    ofDisableBlendMode();
+    ofSetStyle(style);
 }
 
 ofPtr<UniformInfos> ofxInkSim::getUniformInfo()
