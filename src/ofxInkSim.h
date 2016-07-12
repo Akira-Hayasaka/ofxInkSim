@@ -202,6 +202,8 @@ protected:
     FboPingPong fixInk;
     FboPingPong sinkInk;
     
+    ofStyle style;
+    
     // debug
     bool bDebug;
 };

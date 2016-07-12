@@ -60,6 +60,9 @@ void ofxInkSim::setup(int width, int height,
 
 void ofxInkSim::update(bool bEvaporToDisapper)
 {
+    style = ofGetStyle();
+    ofEnableBlendMode(OF_BLENDMODE_DISABLED);
+    
     misc.getNewTex()->begin();
     block.update(width, height,
                  pxSize,
@@ -182,10 +185,15 @@ void ofxInkSim::update(bool bEvaporToDisapper)
                    surfInk.getOldTex()->getTexture());
     flowInk.getNewTex()->end();
     flowInk.swap();
+    
+    ofSetStyle(style);
 }
 
 void ofxInkSim::draw()
 {
+    style = ofGetStyle();
+    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+    
     string whatdraw = "";
     if (drawMode == INKFIX)
     {
@@ -258,6 +266,8 @@ void ofxInkSim::draw()
         ofDrawBitmapStringHighlight(whatdraw, 0, height - h - 50);
         ofDrawBitmapStringHighlight("fps:" + ofToString(ofGetFrameRate()), 0, height - h - 30);
     }
+    
+    ofSetStyle(style);
 }
 
 void ofxInkSim::stroke(vector<StrokeInfo> sis)
@@ -339,6 +349,7 @@ void ofxInkSim::clear()
 
 void ofxInkSim::begin()
 {
+    style = ofGetStyle();
     ofEnableBlendMode(OF_BLENDMODE_SCREEN);
     
     depositionBuffer.begin();
@@ -351,9 +362,9 @@ void ofxInkSim::end()
     ofPopStyle();
     depositionBuffer.end();
     
-    ofDisableBlendMode();
-    
     depositeOnPaperSurface();
+    
+    ofSetStyle(style);
 }
 
 void ofxInkSim::setDrawMode(DRAWMODE drawMode)
