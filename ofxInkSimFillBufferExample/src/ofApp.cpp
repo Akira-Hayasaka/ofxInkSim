@@ -1,6 +1,4 @@
 #include "ofApp.h"
-#include "ofxInkSim.h"
-#include "ofxInkSim.h"
 
 void ofApp::setup()
 {
